@@ -74,7 +74,7 @@ const ProjectCard = ({
 							height: `${CARD_HEIGHT}px`,
 							marginBottom: `calc((100vh - ${CARD_HEIGHT}px) / 2)`,
 						}}>
-						<div className="grid grid-cols-2 h-full gap-4 p-4">
+						<div className="grid grid-cols-1 md:grid-cols-2 h-full gap-4 p-4">
 							<div
 								className={`relative flex flex-col h-full rounded-2xl overflow-visible ${
 									isPlum ? "" : "flex-col-reverse"
