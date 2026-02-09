@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { ArrowUpRight, Star, Phone, Instagram, Facebook } from "lucide-react";
 import { useLenis } from "lenis/react";
+import { motion } from "framer-motion";
 import { ENQUIRY_SECTION_ID } from "@/lib/scroll-targets";
 
 const HERO_IMAGES = [
@@ -65,26 +66,29 @@ const HeroSection = () => {
 				<div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/20 to-transparent lg:from-white lg:via-white/25 lg:to-transparent" />
 
 				{/* Testimonial overlay - glass effect */}
-				<div
-					className="absolute bottom-10 right-6 sm:right-10 left-6 sm:left-auto sm:max-w-[300px] bg-plum/80 backdrop-blur-xl rounded-2xl p-5 border border-white/10 shadow-2xl shadow-plum/20 animate-fade-in"
-					style={{ animationDelay: "0.7s" }}>
+				<motion.div
+					className="absolute bottom-10 right-6 sm:right-10 left-6 sm:left-auto sm:max-w-[300px] bg-plum/80 backdrop-blur-xl rounded-2xl p-5 border border-white/10 shadow-2xl shadow-plum/20"
+					initial={{ opacity: 0, scale: 0.9 }}
+					animate={{ opacity: 1, scale: 1 }}
+					transition={{ duration: 0.48, delay: 0.35 }}>
 					<div className="flex gap-1 mb-3">
 						{[...Array(5)].map((_, i) => (
 							<Star key={i} className="w-4 h-4 fill-gold text-gold" />
 						))}
 					</div>
 					<p className="font-sans text-sm text-white/90 leading-relaxed">
-						&ldquo;Gaia Crafted transformed our backyard into an absolute
-						paradise. Their attention to detail and design expertise is
-						unmatched.&rdquo;
+						&ldquo;Gaia Crafted transformed our backyard into an absolute paradise.
+						Their attention to detail and design expertise is unmatched.&rdquo;
 					</p>
-				</div>
+				</motion.div>
 			</div>
 
 			{/* Phone + social icons - top right */}
-			<div
-				className="absolute top-4 sm:top-6 lg:top-8 right-4 sm:right-6 md:right-10 z-20 flex items-center gap-3 sm:gap-4 animate-fade-in"
-				style={{ animationDelay: "0.5s" }}>
+			<motion.div
+				className="absolute top-4 sm:top-6 lg:top-8 right-4 sm:right-6 md:right-10 z-20 flex items-center gap-3 sm:gap-4"
+				initial={{ opacity: 0, y: -20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.48, delay: 0.5 }}>
 				<a
 					href="tel:+447903533879"
 					className="inline-flex items-center gap-2 bg-plum text-white px-5 py-3 rounded-full text-base font-medium hover:bg-gold hover:scale-105 transition-all duration-300">
@@ -107,13 +111,15 @@ const HeroSection = () => {
 						<Facebook className="w-5 h-5" />
 					</a>
 				</div>
-			</div>
+			</motion.div>
 
 			{/* Top bar with logo */}
 			<div className="relative z-10 w-full max-w-[1400px] mx-auto px-0 lg:px-16 pt-20 sm:pt-20 lg:pt-8">
-				<div
-					className="flex items-center justify-between animate-fade-in"
-					style={{ animationDelay: "0s" }}>
+				<motion.div
+					className="flex items-center justify-between"
+					initial={{ opacity: 0, y: -20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.48, delay: 0 }}>
 					<Image
 						src="/logo.png"
 						alt="Gaia Crafted Landscapes"
@@ -121,41 +127,49 @@ const HeroSection = () => {
 						height={96}
 						className="h-20 sm:h-24 w-auto"
 					/>
-				</div>
+				</motion.div>
 			</div>
 
 			{/* Left content */}
 			<div className="relative z-10 w-full max-w-[1400px] mx-auto px-0 lg:px-16 pb-12 sm:pb-16 flex-1 flex items-center">
 				<div className="flex flex-col gap-8 max-w-xl">
 					{/* Badge */}
-					<div
-						className="animate-fade-in inline-flex items-center gap-2.5 bg-gold px-4 py-2 rounded-full w-fit"
-						style={{ animationDelay: "0.1s" }}>
+					<motion.div
+						className="inline-flex items-center gap-2.5 bg-gold px-4 py-2 rounded-full w-fit"
+						initial={{ opacity: 0, scale: 0.8 }}
+						animate={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.4, delay: 0.05 }}>
 						<span className="w-2 h-2 rounded-full bg-plum animate-pulse-dot" />
 						<span className="text-sm font-sans text-white font-medium">
 							Available for projects
 						</span>
-					</div>
+					</motion.div>
 
 					{/* Heading */}
-					<h1
-						className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[3rem] xl:text-[3.5rem] font-semibold leading-[1.1] tracking-tight text-plum animate-slide-up"
-						style={{ animationDelay: "0.2s" }}>
+					<motion.h1
+						className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[3rem] xl:text-[3.5rem] font-semibold leading-[1.1] tracking-tight text-plum"
+						initial={{ opacity: 0, y: 30 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.64, delay: 0.1 }}>
 						Thoughtfully Designed Gardens, Crafted to Last
-					</h1>
+					</motion.h1>
 
 					{/* Subtitle */}
-					<p
-						className="font-sans text-base md:text-lg text-charcoal/70 leading-relaxed max-w-md animate-slide-up"
-						style={{ animationDelay: "0.4s" }}>
-						Bespoke landscape design and build, creating considered outdoor
-						spaces that feel natural, functional, and truly personal.
-					</p>
+					<motion.p
+						className="font-sans text-base md:text-lg text-charcoal/70 leading-relaxed max-w-md"
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.48, delay: 0.2 }}>
+						Bespoke landscape design and build, creating considered outdoor spaces
+						that feel natural, functional, and truly personal.
+					</motion.p>
 
 					{/* CTA */}
-					<div
-						className="animate-slide-up flex flex-col gap-2"
-						style={{ animationDelay: "0.6s" }}>
+					<motion.div
+						className="flex flex-col gap-2"
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.48, delay: 0.3 }}>
 						<button
 							type="button"
 							onClick={scrollToEnquiry}
@@ -168,7 +182,7 @@ const HeroSection = () => {
 						<p className="font-sans text-sm text-charcoal/60">
 							Design-led projects across South Wales
 						</p>
-					</div>
+					</motion.div>
 				</div>
 			</div>
 		</section>

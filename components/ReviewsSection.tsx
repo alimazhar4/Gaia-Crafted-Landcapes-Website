@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { Star, Quote } from "lucide-react";
+import { motion } from "framer-motion";
 
 const reviewGarden1 = "/Caldicot/After5.JPG";
 const reviewGarden2 = "/Chepstow Finches Close/After2.JPG";
@@ -53,22 +56,35 @@ const ReviewsSection = () => {
 			<div className="max-w-[1400px] mx-auto px-0 md:px-16">
 				{/* Header */}
 				<div className="mb-10 sm:mb-12 md:mb-16 lg:mb-20">
-					<div className="inline-flex items-center bg-gold text-white px-4 py-2 rounded-full mb-4 sm:mb-6">
-						<span className="text-sm font-medium tracking-wide">
-							Client Reviews
-						</span>
-					</div>
-					<h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-white">
+					<motion.div
+						className="inline-flex items-center bg-gold text-white px-4 py-2 rounded-full mb-4 sm:mb-6"
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.48 }}>
+						<span className="text-sm font-medium tracking-wide">Client Reviews</span>
+					</motion.div>
+					<motion.h2
+						className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-white"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.64, delay: 0.1 }}>
 						Gardens crafted with care,
 						<br />
 						<span className="text-white/80">stories told by our clients</span>
-					</h2>
+					</motion.h2>
 				</div>
 
 				{/* Row 1 */}
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-4 md:gap-5 mb-3 sm:mb-4 md:mb-5">
 					{/* Stat Block - Rating */}
-					<div className="lg:col-span-3 bg-plum rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col justify-between min-h-[200px] sm:h-[240px] md:h-[260px] border-2 border-white/40">
+					<motion.div
+						className="lg:col-span-3 bg-plum rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col justify-between min-h-[200px] sm:h-[240px] md:h-[260px] border-2 border-white/40"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.48, delay: 0.2 }}>
 						<div className="flex flex-col gap-2 sm:gap-3">
 							<div className="flex -space-x-2">
 								{[1, 2, 3, 4].map((i) => (
@@ -95,14 +111,22 @@ const ReviewsSection = () => {
 								Average client rating
 							</p>
 						</div>
-					</div>
+					</motion.div>
 
 					{/* Review Card - Featured (Sarah Stylianou) */}
-					<div className="lg:col-span-4 bg-white rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col justify-between min-h-[200px] sm:h-[240px] md:h-[260px] border-2 border-white/40">
+					<motion.div
+						className="lg:col-span-4 bg-white rounded-2xl p-4 sm:p-6 md:p-8 flex flex-col justify-between min-h-[200px] sm:h-[240px] md:h-[260px] border-2 border-white/40"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.48, delay: 0.25 }}>
 						<div>
 							<div className="flex gap-0.5 mb-2 sm:mb-3">
 								{[1, 2, 3, 4, 5].map((i) => (
-									<Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold text-gold" />
+									<Star
+										key={i}
+										className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold text-gold"
+									/>
 								))}
 							</div>
 							<p className="text-plum/80 leading-relaxed text-xs sm:text-sm">
@@ -120,37 +144,55 @@ const ReviewsSection = () => {
 							</div>
 							<Quote className="w-5 h-5 sm:w-6 sm:h-6 text-sage" />
 						</div>
-					</div>
+					</motion.div>
 
 					{/* Image Block 1 (hidden on mobile) */}
-					<div className="hidden md:block relative lg:col-span-5 rounded-2xl overflow-hidden h-[200px] sm:h-[240px] md:h-[260px]">
+					<motion.div
+						className="hidden md:block relative lg:col-span-5 rounded-2xl overflow-hidden h-[200px] sm:h-[240px] md:h-[260px]"
+						initial={{ opacity: 0, scale: 0.95 }}
+						whileInView={{ opacity: 1, scale: 1 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.64, delay: 0.3 }}>
 						<Image
 							src={reviewGarden1}
 							alt="Beautiful garden pathway"
 							fill
 							className="object-cover hover:scale-105 transition-transform duration-500"
 						/>
-					</div>
+					</motion.div>
 				</div>
 
 				{/* Row 2 */}
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-4 md:gap-5 mb-3 sm:mb-4 md:mb-5">
 					{/* Image Block 2 (hidden on mobile) */}
-					<div className="hidden md:block relative lg:col-span-4 rounded-2xl overflow-hidden h-[180px] sm:h-[220px] md:h-[240px]">
+					<motion.div
+						className="hidden md:block relative lg:col-span-4 rounded-2xl overflow-hidden h-[180px] sm:h-[220px] md:h-[240px]"
+						initial={{ opacity: 0, scale: 0.95 }}
+						whileInView={{ opacity: 1, scale: 1 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.64, delay: 0.35 }}>
 						<Image
 							src={reviewGarden2}
 							alt="Modern garden room"
 							fill
 							className="object-cover hover:scale-105 transition-transform duration-500"
 						/>
-					</div>
+					</motion.div>
 
 					{/* Review 2 - Sage */}
-					<div className="lg:col-span-4 bg-sage-light rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[180px] sm:h-[220px] md:h-[240px] border-2 border-white/40">
+					<motion.div
+						className="lg:col-span-4 bg-sage-light rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[180px] sm:h-[220px] md:h-[240px] border-2 border-white/40"
+						initial={{ opacity: 0, scale: 0.9 }}
+						whileInView={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.48, delay: 0.4 }}
+						viewport={{ once: true }}>
 						<div>
 							<div className="flex gap-0.5 mb-2 sm:mb-3">
 								{[1, 2, 3, 4, 5].map((i) => (
-									<Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold text-gold" />
+									<Star
+										key={i}
+										className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold text-gold"
+									/>
 								))}
 							</div>
 							<p className="text-plum/80 leading-relaxed text-xs sm:text-sm">
@@ -166,14 +208,22 @@ const ReviewsSection = () => {
 							</div>
 							<Quote className="w-5 h-5 sm:w-6 sm:h-6 text-plum/30" />
 						</div>
-					</div>
+					</motion.div>
 
 					{/* Review - Robert */}
-					<div className="lg:col-span-4 bg-white rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[180px] sm:h-[220px] md:h-[240px] border-2 border-white/40">
+					<motion.div
+						className="lg:col-span-4 bg-white rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[180px] sm:h-[220px] md:h-[240px] border-2 border-white/40"
+						initial={{ opacity: 0, scale: 0.9 }}
+						whileInView={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.48, delay: 0.45 }}
+						viewport={{ once: true }}>
 						<div>
 							<div className="flex gap-0.5 mb-2 sm:mb-3">
 								{[1, 2, 3, 4, 5].map((i) => (
-									<Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold text-gold" />
+									<Star
+										key={i}
+										className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold text-gold"
+									/>
 								))}
 							</div>
 							<p className="text-plum/80 leading-relaxed text-xs sm:text-sm">
@@ -191,17 +241,25 @@ const ReviewsSection = () => {
 							</div>
 							<Quote className="w-5 h-5 sm:w-6 sm:h-6 text-sage" />
 						</div>
-					</div>
+					</motion.div>
 				</div>
 
 				{/* Row 3 */}
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-4 md:gap-5">
 					{/* Review - Sophie Baron (sage, row 3 left) */}
-					<div className="lg:col-span-3 bg-sage-light rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[160px] sm:h-[200px] md:h-[220px] border-2 border-white/40">
+					<motion.div
+						className="lg:col-span-3 bg-sage-light rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[160px] sm:h-[200px] md:h-[220px] border-2 border-white/40"
+						initial={{ opacity: 0, scale: 0.9 }}
+						whileInView={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.48, delay: 0.5 }}
+						viewport={{ once: true }}>
 						<div>
 							<div className="flex gap-0.5 mb-2 sm:mb-3">
 								{[1, 2, 3, 4, 5].map((i) => (
-									<Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold text-gold" />
+									<Star
+										key={i}
+										className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold text-gold"
+									/>
 								))}
 							</div>
 							<p className="text-plum/80 leading-relaxed text-xs sm:text-sm">
@@ -219,14 +277,22 @@ const ReviewsSection = () => {
 							</div>
 							<Quote className="w-5 h-5 sm:w-6 sm:h-6 text-plum/30" />
 						</div>
-					</div>
+					</motion.div>
 
 					{/* Review 3 - Michael Edwards (dark) */}
-					<div className="lg:col-span-4 bg-charcoal rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[160px] sm:h-[200px] md:h-[220px] border-2 border-white/40">
+					<motion.div
+						className="lg:col-span-4 bg-charcoal rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[160px] sm:h-[200px] md:h-[220px] border-2 border-white/40"
+						initial={{ opacity: 0, scale: 0.9 }}
+						whileInView={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.48, delay: 0.55 }}
+						viewport={{ once: true }}>
 						<div>
 							<div className="flex gap-0.5 mb-2 sm:mb-3">
 								{[1, 2, 3, 4, 5].map((i) => (
-									<Star key={i} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold text-gold" />
+									<Star
+										key={i}
+										className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold text-gold"
+									/>
 								))}
 							</div>
 							<p className="text-white/80 leading-relaxed text-xs sm:text-sm">
@@ -242,20 +308,30 @@ const ReviewsSection = () => {
 							</div>
 							<Quote className="w-5 h-5 sm:w-6 sm:h-6 text-white/20" />
 						</div>
-					</div>
+					</motion.div>
 
 					{/* Image Block 3 (hidden on mobile) */}
-					<div className="hidden md:block relative lg:col-span-3 rounded-2xl overflow-hidden h-[180px] sm:h-[200px] md:h-[220px]">
+					<motion.div
+						className="hidden md:block relative lg:col-span-3 rounded-2xl overflow-hidden h-[180px] sm:h-[200px] md:h-[220px]"
+						initial={{ opacity: 0, scale: 0.9 }}
+						whileInView={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.48, delay: 0.6 }}
+						viewport={{ once: true }}>
 						<Image
 							src={reviewGarden3}
 							alt="Elegant pergola"
 							fill
 							className="object-cover hover:scale-105 transition-transform duration-500"
 						/>
-					</div>
+					</motion.div>
 
 					{/* Stat Block - Gardens */}
-					<div className="lg:col-span-2 bg-plum rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[160px] sm:h-[200px] md:h-[220px] border-2 border-white/40">
+					<motion.div
+						className="lg:col-span-2 bg-plum rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[160px] sm:h-[200px] md:h-[220px] border-2 border-white/40"
+						initial={{ opacity: 0, scale: 0.9 }}
+						whileInView={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.48, delay: 0.65 }}
+						viewport={{ once: true }}>
 						<p className="text-white/60 text-xs">Projects delivered</p>
 						<div>
 							<p className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-gold">
@@ -265,7 +341,7 @@ const ReviewsSection = () => {
 								Gardens created
 							</p>
 						</div>
-					</div>
+					</motion.div>
 				</div>
 			</div>
 		</section>

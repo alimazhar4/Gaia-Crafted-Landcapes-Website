@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Check } from "lucide-react";
 import { useLenis } from "lenis/react";
+import { motion } from "framer-motion";
 import { ENQUIRY_SECTION_ID } from "@/lib/scroll-targets";
 
 const reassuranceConsultation = "/Caldicot/IMG_0688.JPG";
@@ -17,8 +18,7 @@ const expectations = [
 	},
 	{
 		title: "Honest guidance",
-		description:
-			"On what will work best for your garden, budget, and timeframe",
+		description: "On what will work best for your garden, budget, and timeframe",
 	},
 	{
 		title: "Clear next steps",
@@ -48,25 +48,42 @@ const ReassuranceSection = () => {
 						{/* Header */}
 						<div className="mb-8 sm:mb-10 md:mb-12">
 							<div className="mb-4 sm:mb-6 md:mb-8">
-								<span className="inline-flex items-center bg-plum text-white px-4 py-2 rounded-full text-sm font-medium tracking-wide">
+								<motion.span
+									className="inline-flex items-center bg-plum text-white px-4 py-2 rounded-full text-sm font-medium tracking-wide"
+									initial={{ opacity: 0, y: 20 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									viewport={{ once: true }}
+									transition={{ duration: 0.48 }}>
 									Getting Started
-								</span>
+								</motion.span>
 							</div>
 
-							<h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.05] tracking-tight text-plum mb-5 sm:mb-6 md:mb-8">
+							<motion.h2
+								className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.05] tracking-tight text-plum mb-5 sm:mb-6 md:mb-8"
+								initial={{ opacity: 0, y: 30 }}
+								whileInView={{ opacity: 1, y: 0 }}
+								viewport={{ once: true }}
+								transition={{ duration: 0.64, delay: 0.1 }}>
 								What to <span className="text-plum/50">expect</span>
-							</h2>
+							</motion.h2>
 						</div>
 
 						{/* Expectations list */}
 						<div className="space-y-3 sm:space-y-4">
 							{expectations.map((item, index) => (
-								<div
+								<motion.div
 									key={index}
-									className="group flex gap-3 sm:gap-5 p-4 sm:p-5 bg-white/50 backdrop-blur-sm rounded-xl border border-sage/20 hover:bg-white hover:shadow-lg hover:border-sage/40 transition-all duration-300 cursor-default">
+									className="group flex gap-3 sm:gap-5 p-4 sm:p-5 bg-white/50 backdrop-blur-sm rounded-xl border border-sage/20 hover:bg-white hover:shadow-lg hover:border-sage/40 transition-all duration-300 cursor-default"
+									initial={{ opacity: 0, x: -30 }}
+									whileInView={{ opacity: 1, x: 0 }}
+									viewport={{ once: true }}
+									transition={{ duration: 0.48, delay: 0.2 + index * 0.05 }}>
 									{/* Number indicator */}
 									<div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-plum flex items-center justify-center group-hover:bg-gold transition-colors duration-300">
-										<Check className="w-4 h-4 sm:w-5 sm:h-5 text-white" strokeWidth={2.5} />
+										<Check
+											className="w-4 h-4 sm:w-5 sm:h-5 text-white"
+											strokeWidth={2.5}
+										/>
 									</div>
 
 									{/* Content */}
@@ -78,12 +95,17 @@ const ReassuranceSection = () => {
 											{item.description}
 										</p>
 									</div>
-								</div>
+								</motion.div>
 							))}
 						</div>
 
 						{/* CTA */}
-						<div className="mt-6 sm:mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start">
+						<motion.div
+							className="mt-6 sm:mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.48, delay: 0.4 }}>
 							<button
 								type="button"
 								onClick={scrollToEnquiry}
@@ -106,13 +128,18 @@ const ReassuranceSection = () => {
 							<span className="text-plum/40 text-xs sm:text-sm self-start sm:self-center italic">
 								Response within 24 hours
 							</span>
-						</div>
+						</motion.div>
 					</div>
 
 					{/* Right side - Images */}
 					<div className="order-1 lg:order-2 relative">
 						{/* Main large image */}
-						<div className="relative z-10 h-[280px] sm:h-[340px] md:h-[550px] lg:h-[620px] rounded-2xl overflow-hidden shadow-2xl">
+						<motion.div
+							className="relative z-10 h-[280px] sm:h-[340px] md:h-[550px] lg:h-[620px] rounded-2xl overflow-hidden shadow-2xl"
+							initial={{ opacity: 0, scale: 0.95 }}
+							whileInView={{ opacity: 1, scale: 1 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.64, delay: 0.15 }}>
 							<Image
 								src={reassuranceConsultation}
 								alt="Garden consultation"
@@ -122,10 +149,15 @@ const ReassuranceSection = () => {
 							/>
 							{/* Subtle overlay */}
 							<div className="absolute inset-0 bg-gradient-to-t from-plum/15 via-transparent to-transparent pointer-events-none" />
-						</div>
+						</motion.div>
 
 						{/* Small image - Top left corner */}
-						<div className="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 md:-top-8 md:-left-8 w-[100px] sm:w-[140px] md:w-[180px] h-[72px] sm:h-[100px] md:h-[130px] z-20 rounded-xl overflow-hidden shadow-xl border-2 sm:border-4 border-sage-light rotate-[-3deg] hover:rotate-0 transition-transform duration-500">
+						<motion.div
+							className="absolute -top-4 -left-4 sm:-top-6 sm:-left-6 md:-top-8 md:-left-8 w-[100px] sm:w-[140px] md:w-[180px] h-[72px] sm:h-[100px] md:h-[130px] z-20 rounded-xl overflow-hidden shadow-xl border-2 sm:border-4 border-sage-light rotate-[-3deg] hover:rotate-0 transition-transform duration-500"
+							initial={{ opacity: 0, scale: 0.8, rotate: -6 }}
+							whileInView={{ opacity: 1, scale: 1, rotate: -3 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.48, delay: 0.3 }}>
 							<Image
 								src={reassuranceSketch}
 								alt="Garden sketching"
@@ -133,10 +165,15 @@ const ReassuranceSection = () => {
 								className="object-cover"
 								sizes="180px"
 							/>
-						</div>
+						</motion.div>
 
 						{/* Small image - Bottom right corner */}
-						<div className="absolute -bottom-4 -right-3 sm:-bottom-6 sm:-right-4 md:-bottom-8 md:-right-6 w-[120px] sm:w-[160px] md:w-[200px] h-[90px] sm:h-[120px] md:h-[150px] z-20 rounded-xl overflow-hidden shadow-xl border-2 sm:border-4 border-sage-light rotate-[3deg] hover:rotate-0 transition-transform duration-500">
+						<motion.div
+							className="absolute -bottom-4 -right-3 sm:-bottom-6 sm:-right-4 md:-bottom-8 md:-right-6 w-[120px] sm:w-[160px] md:w-[200px] h-[90px] sm:h-[120px] md:h-[150px] z-20 rounded-xl overflow-hidden shadow-xl border-2 sm:border-4 border-sage-light rotate-[3deg] hover:rotate-0 transition-transform duration-500"
+							initial={{ opacity: 0, scale: 0.8, rotate: 6 }}
+							whileInView={{ opacity: 1, scale: 1, rotate: 3 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.48, delay: 0.4 }}>
 							<Image
 								src={reassurancePlanning}
 								alt="Garden planning"
@@ -144,7 +181,7 @@ const ReassuranceSection = () => {
 								className="object-cover"
 								sizes="200px"
 							/>
-						</div>
+						</motion.div>
 					</div>
 				</div>
 			</div>

@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const images = [
 	"/Caldicot/After2.JPG",
@@ -69,40 +72,64 @@ const QualificationSection = () => {
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-20 items-start">
 					{/* Left column - 1/3 */}
 					<div className="lg:col-span-1">
-						<span className="inline-flex items-center bg-plum text-white px-5 py-2 rounded-full mb-10 text-xs font-semibold tracking-[0.25em]">
+						<motion.div
+							className="inline-flex items-center bg-plum text-white px-5 py-2 rounded-full mb-10 text-xs font-semibold tracking-[0.25em]"
+							initial={{ opacity: 0, scale: 0.8 }}
+							whileInView={{ opacity: 1, scale: 1 }}
+							transition={{ duration: 0.5, delay: 0.1 }}
+							viewport={{ once: true }}>
 							Qualification
-						</span>
-						<h2 className="font-display text-4xl md:text-5xl lg:text-[3.75rem] font-semibold leading-[1.08] tracking-tight text-plum">
+						</motion.div>
+						<motion.h2
+							className="font-display text-4xl md:text-5xl lg:text-[3.75rem] font-semibold leading-[1.08] tracking-tight text-plum"
+							initial={{ opacity: 0, y: 30 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.8, delay: 0.3 }}
+							viewport={{ once: true }}>
 							This may be
 							<br />
 							right for you if…
-						</h2>
+						</motion.h2>
 					</div>
 
 					{/* Right column - 2/3 */}
 					<div className="lg:col-span-2 lg:pt-14 space-y-0">
 						{qualifications.map((item, index) => (
-							<div
+							<motion.div
 								key={index}
-								className="flex items-start gap-5 py-3 border-b border-plum/25 last:border-b-0">
+								className="flex items-start gap-5 py-3 border-b border-plum/25 last:border-b-0"
+								initial={{ opacity: 0, x: 30 }}
+								whileInView={{ opacity: 1, x: 0 }}
+								transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+								viewport={{ once: true }}>
 								<span className="flex-shrink-0 mt-2.5 w-1.5 h-1.5 rounded-full bg-plum" />
 								<p className="font-display text-lg md:text-xl lg:text-2xl text-plum leading-relaxed font-semibold">
 									{item}
 								</p>
-							</div>
+							</motion.div>
 						))}
-						<div className="pt-6 mt-2">
+						<motion.div
+							className="pt-6 mt-2"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.6, delay: 0.9 }}
+							viewport={{ once: true }}>
 							<p className="text-sm md:text-base text-plum italic leading-relaxed font-light">
-								We specialise in carefully planned, design-led landscape
-								projects rather than high-volume work.
+								We specialise in carefully planned, design-led landscape projects rather
+								than high-volume work.
 							</p>
-						</div>
+						</motion.div>
 					</div>
 				</div>
 			</div>
 
 			{/* Infinite scrolling image carousel - full width (full-bleed on mobile) */}
-			<div className="relative w-[100vw] max-w-none left-1/2 -translate-x-1/2 md:w-full md:left-0 md:translate-x-0 mb-16 sm:mb-20 md:mb-24 lg:mb-32 overflow-hidden">
+			<motion.div
+				className="relative w-[100vw] max-w-none left-1/2 -translate-x-1/2 md:w-full md:left-0 md:translate-x-0 mb-16 sm:mb-20 md:mb-24 lg:mb-32 overflow-hidden"
+				initial={{ opacity: 0, y: 50 }}
+				whileInView={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.8, delay: 0.2 }}
+				viewport={{ once: true }}>
 				<div className="flex w-max animate-scroll-left pl-4 sm:pl-6 md:pl-0">
 					{images.map((img, index) => (
 						<div
@@ -131,13 +158,19 @@ const QualificationSection = () => {
 						</div>
 					))}
 				</div>
-			</div>
+			</motion.div>
 
 			{/* Stats */}
 			<div className="max-w-[1400px] mx-auto px-0 md:px-16">
 				<div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
 					{stats.map((stat, index) => (
-						<div key={index} className="space-y-2">
+						<motion.div
+							key={index}
+							className="space-y-2"
+							initial={{ opacity: 0, y: 30 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
+							viewport={{ once: true }}>
 							<span className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-gold">
 								{stat.value}
 							</span>
@@ -147,7 +180,7 @@ const QualificationSection = () => {
 							<p className="text-sm md:text-base text-plum leading-relaxed font-light">
 								{stat.description}
 							</p>
-						</div>
+						</motion.div>
 					))}
 				</div>
 			</div>

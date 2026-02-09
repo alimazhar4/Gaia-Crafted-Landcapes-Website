@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ChevronRight, ChevronLeft, Check } from "lucide-react";
+import { motion } from "framer-motion";
 
 const enquiryBgImage = "/Thornbury/IMG_1325.JPG";
 
@@ -258,23 +259,36 @@ const GardenEnquiryForm = () => {
 				{/* Gradient: top to bottom (dark at top, transparent at bottom) */}
 				<div className="absolute inset-0 z-10 bg-gradient-to-b from-plum-dark via-plum-dark/90 to-transparent" />
 				<div className="relative z-20 max-w-[800px] mx-auto px-0 md:px-16 text-center">
-					<div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gold mb-6 sm:mb-8">
+					<motion.div
+						className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gold mb-6 sm:mb-8"
+						initial={{ scale: 0, opacity: 0 }}
+						animate={{ scale: 1, opacity: 1 }}
+						transition={{ duration: 0.48, delay: 0.1 }}>
 						<Check className="w-8 h-8 sm:w-10 sm:h-10 text-plum" />
-					</div>
-					<h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mb-4 sm:mb-6">
+					</motion.div>
+					<motion.h2
+						className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mb-4 sm:mb-6"
+						initial={{ opacity: 0, y: 30 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.64, delay: 0.1 }}>
 						Thank you for your enquiry
-					</h2>
-					<p className="text-base sm:text-xl text-white/80">
-						We&apos;ll be in touch within 24 hours to discuss your garden
-						project.
-					</p>
+					</motion.h2>
+					<motion.p
+						className="text-base sm:text-xl text-white/80"
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.48, delay: 0.3 }}>
+						We&apos;ll be in touch within 24 hours to discuss your garden project.
+					</motion.p>
 				</div>
 			</section>
 		);
 	}
 
 	return (
-		<section id="garden-enquiry" className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden px-4 sm:px-6 md:px-0">
+		<section
+			id="garden-enquiry"
+			className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden px-4 sm:px-6 md:px-0">
 			{/* Background image */}
 			<div className="absolute inset-0 z-0">
 				<Image
@@ -290,20 +304,40 @@ const GardenEnquiryForm = () => {
 			<div className="relative z-20 max-w-[1000px] mx-auto px-0 md:px-16">
 				{/* Header */}
 				<div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
-					<span className="inline-flex items-center bg-gold text-white px-4 py-2 rounded-full mb-4 sm:mb-6 text-sm font-medium tracking-wide">
+					<motion.span
+						className="inline-flex items-center bg-gold text-white px-4 py-2 rounded-full mb-4 sm:mb-6 text-sm font-medium tracking-wide"
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.48 }}>
 						Get Started
-					</span>
-					<h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-white mb-4 sm:mb-6">
+					</motion.span>
+					<motion.h2
+						className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-white mb-4 sm:mb-6"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.64, delay: 0.1 }}>
 						Start your garden enquiry
-					</h2>
-					<p className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
-						Tell us a little about your project and we&apos;ll be in touch to
-						discuss your ideas, timings, and next steps.
-					</p>
+					</motion.h2>
+					<motion.p
+						className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed"
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.48, delay: 0.1 }}>
+						Tell us a little about your project and we&apos;ll be in touch to discuss
+						your ideas, timings, and next steps.
+					</motion.p>
 				</div>
 
 				{/* Progress indicator */}
-				<div className="flex items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-10 md:mb-12">
+				<motion.div
+					className="flex items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-10 md:mb-12"
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.48, delay: 0.3 }}>
 					{[1, 2, 3].map((step) => (
 						<div key={step} className="flex items-center gap-2 sm:gap-3">
 							<div
@@ -325,24 +359,37 @@ const GardenEnquiryForm = () => {
 							)}
 						</div>
 					))}
-				</div>
+				</motion.div>
 
 				{/* Form container */}
-				<div className="bg-sage-light rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-12 md:pb-8 shadow-xl">
+				<motion.div
+					className="bg-sage-light rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-12 md:pb-8 shadow-xl"
+					initial={{ opacity: 0, y: 40 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.64, delay: 0.2 }}>
 					<form onSubmit={handleSubmit}>
 						<div className="relative min-h-[360px] sm:min-h-[400px] overflow-hidden">
 							{/* Step 1 - Project Type */}
 							<div
 								className={`w-full transition-all duration-500 ease-in-out ${getSlideClasses(1)}`}>
-								<h3 className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-plum mb-2">
+								<motion.h3
+									className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-plum mb-2"
+									initial={{ opacity: 0, y: 20 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.48, delay: 0.1 }}>
 									What best describes your project?
-								</h3>
-								<p className="text-plum/60 text-sm sm:text-base mb-5 sm:mb-6 md:mb-8">
+								</motion.h3>
+								<motion.p
+									className="text-plum/60 text-sm sm:text-base mb-5 sm:mb-6 md:mb-8"
+									initial={{ opacity: 0, y: 15 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.4, delay: 0.15 }}>
 									Select one option to continue
-								</p>
+								</motion.p>
 								<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-									{projectOptions.map((option) => (
-										<button
+									{projectOptions.map((option, index) => (
+										<motion.button
 											key={option.id}
 											type="button"
 											onClick={() => handleProjectSelect(option.id)}
@@ -350,7 +397,10 @@ const GardenEnquiryForm = () => {
 												formData.projectType === option.id
 													? "border-plum bg-plum text-white shadow-lg shadow-plum/30"
 													: "border-plum/25 hover:border-plum/40 bg-sage/30 hover:bg-sage/50 text-plum"
-											}`}>
+											}`}
+											initial={{ opacity: 0, y: 30 }}
+											animate={{ opacity: 1, y: 0 }}
+											transition={{ duration: 0.48, delay: 0.2 + index * 0.05 }}>
 											<div className="flex items-start gap-3 sm:gap-4">
 												<span
 													className={`shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors ${
@@ -363,15 +413,13 @@ const GardenEnquiryForm = () => {
 												<div className="flex-1 min-w-0">
 													<span
 														className={`block font-medium text-sm sm:text-base leading-tight ${
-															formData.projectType === option.id
-																? "text-white"
-																: "text-plum"
+															formData.projectType === option.id ? "text-white" : "text-plum"
 														}`}>
 														{option.label}
 													</span>
 												</div>
 											</div>
-										</button>
+										</motion.button>
 									))}
 								</div>
 							</div>
@@ -379,15 +427,23 @@ const GardenEnquiryForm = () => {
 							{/* Step 2 - Journey Stage */}
 							<div
 								className={`w-full transition-all duration-500 ease-in-out ${getSlideClasses(2)}`}>
-								<h3 className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-plum mb-2">
+								<motion.h3
+									className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-plum mb-2"
+									initial={{ opacity: 0, y: 20 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.48, delay: 0.1 }}>
 									Where are you in your renovation journey?
-								</h3>
-								<p className="text-plum/60 text-sm sm:text-base mb-5 sm:mb-6 md:mb-8">
+								</motion.h3>
+								<motion.p
+									className="text-plum/60 text-sm sm:text-base mb-5 sm:mb-6 md:mb-8"
+									initial={{ opacity: 0, y: 15 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.4, delay: 0.3 }}>
 									This helps us understand your timeline
-								</p>
+								</motion.p>
 								<div className="space-y-2 sm:space-y-3">
-									{journeyOptions.map((option) => (
-										<button
+									{journeyOptions.map((option, index) => (
+										<motion.button
 											key={option.id}
 											type="button"
 											onClick={() => handleJourneySelect(option.id)}
@@ -395,7 +451,10 @@ const GardenEnquiryForm = () => {
 												formData.journeyStage === option.id
 													? "border-plum bg-plum text-white"
 													: "border-plum/25 hover:border-plum/50 bg-sage/30"
-											}`}>
+											}`}
+											initial={{ opacity: 0, x: -30 }}
+											animate={{ opacity: 1, x: 0 }}
+											transition={{ duration: 0.48, delay: 0.2 + index * 0.05 }}>
 											<span
 												className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
 													formData.journeyStage === option.id
@@ -408,13 +467,11 @@ const GardenEnquiryForm = () => {
 											</span>
 											<span
 												className={`text-base sm:text-lg ${
-													formData.journeyStage === option.id
-														? "text-white"
-														: "text-plum"
+													formData.journeyStage === option.id ? "text-white" : "text-plum"
 												}`}>
 												{option.label}
 											</span>
-										</button>
+										</motion.button>
 									))}
 								</div>
 							</div>
@@ -422,12 +479,20 @@ const GardenEnquiryForm = () => {
 							{/* Step 3 - Contact Details */}
 							<div
 								className={`w-full transition-all duration-500 ease-in-out ${getSlideClasses(3)}`}>
-								<h3 className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-plum mb-2">
+								<motion.h3
+									className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-plum mb-2"
+									initial={{ opacity: 0, y: 20 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.48, delay: 0.1 }}>
 									Your contact details
-								</h3>
-								<p className="text-plum/60 text-sm sm:text-base mb-5 sm:mb-6 md:mb-8">
+								</motion.h3>
+								<motion.p
+									className="text-plum/60 text-sm sm:text-base mb-5 sm:mb-6 md:mb-8"
+									initial={{ opacity: 0, y: 15 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ duration: 0.4, delay: 0.3 }}>
 									We&apos;ll use these to get in touch
-								</p>
+								</motion.p>
 								<div className="space-y-4 sm:space-y-5">
 									{/* Row 1: Name - full width */}
 									<div className="w-full">
@@ -516,8 +581,11 @@ const GardenEnquiryForm = () => {
 						)}
 
 						{/* Navigation buttons */}
-						<div
-							className={`${currentStep === 3 ? "mt-2" : currentStep === 2 ? "mt-6 sm:mt-10" : "mt-6 sm:mt-8"} flex items-center justify-between pt-4 border-t border-plum/20 `}>
+						<motion.div
+							className={`${currentStep === 3 ? "mt-2" : currentStep === 2 ? "mt-6 sm:mt-10" : "mt-6 sm:mt-8"} flex items-center justify-between pt-4 border-t border-plum/20 `}
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.4, delay: 0.2 }}>
 							<button
 								type="button"
 								onClick={goToPreviousStep}
@@ -547,9 +615,7 @@ const GardenEnquiryForm = () => {
 										className="flex items-center gap-2 px-5 sm:px-6 md:px-8 py-2.5 sm:py-3.5 rounded-full bg-plum text-white font-medium hover:bg-plum/90 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base">
 										{isSubmitting ? (
 											<>
-												<svg
-													className="animate-spin w-5 h-5"
-													viewBox="0 0 24 24">
+												<svg className="animate-spin w-5 h-5" viewBox="0 0 24 24">
 													<circle
 														className="opacity-25"
 														cx="12"
@@ -576,9 +642,9 @@ const GardenEnquiryForm = () => {
 									</button>
 								</div>
 							)}
-						</div>
+						</motion.div>
 					</form>
-				</div>
+				</motion.div>
 			</div>
 		</section>
 	);

@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ProjectsStackSection } from "@/components/ProjectsStackSection";
 import { projects } from "@/lib/projects";
 
@@ -14,16 +17,31 @@ export default function ProjectsPage() {
 
 			{/* Header - extra top margin on mobile for spacing below back button */}
 			<div className="pt-24 sm:pt-20 md:pt-12 lg:pt-16 pb-8 sm:pb-10 md:py-12 md:pb-16 text-center px-0 md:px-8">
-				<div className="inline-flex items-center bg-gold text-white px-4 py-2 rounded-full mb-4 sm:mb-6">
+				<motion.div
+					className="inline-flex items-center bg-gold text-white px-4 py-2 rounded-full mb-4 sm:mb-6"
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6, delay: 0.05 }}
+					viewport={{ once: true }}>
 					<span className="text-sm font-medium tracking-wide">Our work</span>
-				</div>
-				<h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight text-white mb-4 sm:mb-6">
+				</motion.div>
+				<motion.h1
+					className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight text-white mb-4 sm:mb-6"
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.48, delay: 0.1 }}
+					viewport={{ once: true }}>
 					All projects
-				</h1>
-				<p className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+				</motion.h1>
+				<motion.p
+					className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mx-auto"
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.48, delay: 0.15 }}
+					viewport={{ once: true }}>
 					See how we&apos;ve transformed homes with our expert craftsmanship and
 					attention to detail.
-				</p>
+				</motion.p>
 			</div>
 
 			<ProjectsStackSection projects={projects} />
