@@ -112,18 +112,18 @@ const GaiaCraftedWaySection = () => {
 	const [activePillar, setActivePillar] = useState<string>("design");
 
 	return (
-		<section className="py-24 md:py-32 bg-sage-light">
-			<div className="max-w-[1400px] mx-auto px-8 md:px-16">
+		<section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-sage-light px-4 sm:px-6 md:px-0">
+			<div className="max-w-[1400px] mx-auto px-0 md:px-16">
 				{/* Header */}
-				<div className="text-center mb-16 md:mb-20">
-					<span className="inline-flex items-center bg-plum text-white px-4 py-2 rounded-full mb-6 text-sm font-medium tracking-wide">
+				<div className="text-center mb-10 sm:mb-12 md:mb-16 lg:mb-20">
+					<span className="inline-flex items-center bg-plum text-white px-4 py-2 rounded-full mb-4 sm:mb-6 text-sm font-medium tracking-wide">
 						The Gaia Crafted Way
 					</span>
-					<h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-plum mb-6">
+					<h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-plum mb-4 sm:mb-6">
 						A considered approach from
 						<br className="hidden md:block" /> concept to completion
 					</h2>
-					<p className="text-lg md:text-xl text-plum/80 max-w-3xl mx-auto leading-relaxed">
+					<p className="text-base sm:text-lg md:text-xl text-plum/80 max-w-3xl mx-auto leading-relaxed">
 						At Gaia Crafted Landscapes, every project begins with understanding.
 						Your space, your home, and how you want to use your garden. We take
 						a thoughtful, design-led approach to landscaping, carefully
@@ -133,9 +133,9 @@ const GaiaCraftedWaySection = () => {
 				</div>
 
 				{/* Content grid */}
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-center">
 					{/* Image with crossfade */}
-					<div className="relative h-[450px] md:h-[550px] lg:h-[650px] rounded-2xl overflow-hidden shadow-2xl">
+					<div className="relative h-[320px] sm:h-[380px] md:h-[550px] lg:h-[650px] rounded-2xl overflow-hidden shadow-2xl">
 						{/* Fallback image when accordion is closed */}
 						<Image
 							src={FALLBACK_IMAGE}
@@ -164,7 +164,7 @@ const GaiaCraftedWaySection = () => {
 
 					{/* Accordion */}
 					<div className="space-y-0">
-						<p className="text-plum/70 mb-8 text-base leading-relaxed">
+						<p className="text-plum/70 mb-6 md:mb-8 text-sm sm:text-base leading-relaxed">
 							From initial ideas through to final build, our focus is on
 							craftsmanship, clarity, and creating gardens that stand the test
 							of time.
@@ -175,16 +175,16 @@ const GaiaCraftedWaySection = () => {
 									onClick={() =>
 										setActivePillar(activePillar === pillar.id ? "" : pillar.id)
 									}
-									className="w-full flex items-center justify-between py-5 md:py-6 text-left group cursor-pointer">
-									<div className="flex items-center gap-4">
-										<span className="text-plum transition-colors group-hover:text-gold">
+									className="w-full flex items-center justify-between py-4 md:py-5 lg:py-6 text-left group cursor-pointer">
+									<div className="flex items-center gap-3 sm:gap-4">
+										<span className="text-plum transition-colors group-hover:text-gold flex-shrink-0">
 											{pillar.icon}
 										</span>
-										<span className="font-display text-lg md:text-xl font-medium text-plum">
+										<span className="font-display text-base sm:text-lg md:text-xl font-medium text-plum">
 											{pillar.title}
 										</span>
 									</div>
-									<span className="text-plum/60 group-hover:text-plum transition-colors">
+									<span className="text-plum/60 group-hover:text-plum transition-colors flex-shrink-0">
 										{activePillar === pillar.id ? (
 											<X className="w-5 h-5" />
 										) : (
@@ -196,10 +196,10 @@ const GaiaCraftedWaySection = () => {
 								<div
 									className={`overflow-hidden transition-all duration-500 ease-in-out ${
 										activePillar === pillar.id
-											? "max-h-[300px] opacity-100 pb-6"
+											? "max-h-[300px] opacity-100 pb-4 md:pb-6"
 											: "max-h-0 opacity-0"
 									}`}>
-									<p className="text-plum/70 leading-relaxed pl-12">
+									<p className="text-plum/70 leading-relaxed pl-8 sm:pl-10 md:pl-12 text-sm sm:text-base">
 										{pillar.description}
 									</p>
 								</div>

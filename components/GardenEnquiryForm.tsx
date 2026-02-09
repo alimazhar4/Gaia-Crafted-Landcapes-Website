@@ -244,7 +244,7 @@ const GardenEnquiryForm = () => {
 
 	if (isSubmitted) {
 		return (
-			<section className="relative py-24 md:py-32 overflow-hidden">
+			<section className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden px-4 sm:px-6 md:px-0">
 				{/* Background image */}
 				<div className="absolute inset-0 z-0">
 					<Image
@@ -257,14 +257,14 @@ const GardenEnquiryForm = () => {
 				</div>
 				{/* Gradient: top to bottom (dark at top, transparent at bottom) */}
 				<div className="absolute inset-0 z-10 bg-gradient-to-b from-plum-dark via-plum-dark/90 to-transparent" />
-				<div className="relative z-20 max-w-[800px] mx-auto px-8 md:px-16 text-center">
-					<div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gold mb-8">
-						<Check className="w-10 h-10 text-plum" />
+				<div className="relative z-20 max-w-[800px] mx-auto px-0 md:px-16 text-center">
+					<div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gold mb-6 sm:mb-8">
+						<Check className="w-8 h-8 sm:w-10 sm:h-10 text-plum" />
 					</div>
-					<h2 className="font-display text-4xl md:text-5xl font-semibold text-white mb-6">
+					<h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-white mb-4 sm:mb-6">
 						Thank you for your enquiry
 					</h2>
-					<p className="text-xl text-white/80">
+					<p className="text-base sm:text-xl text-white/80">
 						We&apos;ll be in touch within 24 hours to discuss your garden
 						project.
 					</p>
@@ -274,7 +274,7 @@ const GardenEnquiryForm = () => {
 	}
 
 	return (
-		<section id="garden-enquiry" className="relative py-24 md:py-32 overflow-hidden">
+		<section id="garden-enquiry" className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden px-4 sm:px-6 md:px-0">
 			{/* Background image */}
 			<div className="absolute inset-0 z-0">
 				<Image
@@ -287,27 +287,27 @@ const GardenEnquiryForm = () => {
 			</div>
 			{/* Gradient: top to bottom (dark at top, transparent at bottom) */}
 			<div className="absolute inset-0 z-10 bg-gradient-to-b from-plum-dark via-plum-dark/90 to-transparent" />
-			<div className="relative z-20 max-w-[1000px] mx-auto px-8 md:px-16">
+			<div className="relative z-20 max-w-[1000px] mx-auto px-0 md:px-16">
 				{/* Header */}
-				<div className="text-center mb-12 md:mb-16">
-					<span className="inline-flex items-center bg-gold text-white px-4 py-2 rounded-full mb-6 text-sm font-medium tracking-wide">
+				<div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+					<span className="inline-flex items-center bg-gold text-white px-4 py-2 rounded-full mb-4 sm:mb-6 text-sm font-medium tracking-wide">
 						Get Started
 					</span>
-					<h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-white mb-6">
+					<h2 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight text-white mb-4 sm:mb-6">
 						Start your garden enquiry
 					</h2>
-					<p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+					<p className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
 						Tell us a little about your project and we&apos;ll be in touch to
 						discuss your ideas, timings, and next steps.
 					</p>
 				</div>
 
 				{/* Progress indicator */}
-				<div className="flex items-center justify-center gap-3 mb-12">
+				<div className="flex items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-10 md:mb-12">
 					{[1, 2, 3].map((step) => (
-						<div key={step} className="flex items-center gap-3">
+						<div key={step} className="flex items-center gap-2 sm:gap-3">
 							<div
-								className={`w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm transition-all duration-300 ${
+								className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-medium text-xs sm:text-sm transition-all duration-300 ${
 									step < currentStep
 										? "bg-gold text-white"
 										: step === currentStep
@@ -318,7 +318,7 @@ const GardenEnquiryForm = () => {
 							</div>
 							{step < 3 && (
 								<div
-									className={`w-12 md:w-20 h-0.5 transition-all duration-500 ${
+									className={`w-8 sm:w-12 md:w-20 h-0.5 transition-all duration-500 ${
 										step < currentStep ? "bg-gold" : "bg-white/20"
 									}`}
 								/>
@@ -328,32 +328,32 @@ const GardenEnquiryForm = () => {
 				</div>
 
 				{/* Form container */}
-				<div className="bg-sage-light rounded-3xl p-8 md:p-12 md:pb-8 shadow-xl">
+				<div className="bg-sage-light rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-12 md:pb-8 shadow-xl">
 					<form onSubmit={handleSubmit}>
-						<div className="relative min-h-[400px] overflow-hidden">
+						<div className="relative min-h-[360px] sm:min-h-[400px] overflow-hidden">
 							{/* Step 1 - Project Type */}
 							<div
 								className={`w-full transition-all duration-500 ease-in-out ${getSlideClasses(1)}`}>
-								<h3 className="font-display text-2xl md:text-3xl font-medium text-plum mb-2">
+								<h3 className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-plum mb-2">
 									What best describes your project?
 								</h3>
-								<p className="text-plum/60 mb-8">
+								<p className="text-plum/60 text-sm sm:text-base mb-5 sm:mb-6 md:mb-8">
 									Select one option to continue
 								</p>
-								<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+								<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
 									{projectOptions.map((option) => (
 										<button
 											key={option.id}
 											type="button"
 											onClick={() => handleProjectSelect(option.id)}
-											className={`group relative p-6 rounded-2xl text-left transition-all duration-300 hover:-translate-y-1 cursor-pointer border-2 ${
+											className={`group relative p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl text-left transition-all duration-300 hover:-translate-y-1 cursor-pointer border-2 ${
 												formData.projectType === option.id
 													? "border-plum bg-plum text-white shadow-lg shadow-plum/30"
 													: "border-plum/25 hover:border-plum/40 bg-sage/30 hover:bg-sage/50 text-plum"
 											}`}>
-											<div className="flex items-start gap-4">
+											<div className="flex items-start gap-3 sm:gap-4">
 												<span
-													className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${
+													className={`shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl flex items-center justify-center transition-colors ${
 														formData.projectType === option.id
 															? "bg-white/20 text-gold"
 															: "bg-plum/10 text-plum group-hover:bg-plum/20"
@@ -362,7 +362,7 @@ const GardenEnquiryForm = () => {
 												</span>
 												<div className="flex-1 min-w-0">
 													<span
-														className={`block font-medium text-base leading-tight ${
+														className={`block font-medium text-sm sm:text-base leading-tight ${
 															formData.projectType === option.id
 																? "text-white"
 																: "text-plum"
@@ -379,19 +379,19 @@ const GardenEnquiryForm = () => {
 							{/* Step 2 - Journey Stage */}
 							<div
 								className={`w-full transition-all duration-500 ease-in-out ${getSlideClasses(2)}`}>
-								<h3 className="font-display text-2xl md:text-3xl font-medium text-plum mb-2">
+								<h3 className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-plum mb-2">
 									Where are you in your renovation journey?
 								</h3>
-								<p className="text-plum/60 mb-8">
+								<p className="text-plum/60 text-sm sm:text-base mb-5 sm:mb-6 md:mb-8">
 									This helps us understand your timeline
 								</p>
-								<div className="space-y-3">
+								<div className="space-y-2 sm:space-y-3">
 									{journeyOptions.map((option) => (
 										<button
 											key={option.id}
 											type="button"
 											onClick={() => handleJourneySelect(option.id)}
-											className={`w-full p-5 rounded-xl border-2 text-left transition-all duration-300 flex items-center gap-4 cursor-pointer ${
+											className={`w-full p-4 sm:p-5 rounded-xl border-2 text-left transition-all duration-300 flex items-center gap-3 sm:gap-4 cursor-pointer ${
 												formData.journeyStage === option.id
 													? "border-plum bg-plum text-white"
 													: "border-plum/25 hover:border-plum/50 bg-sage/30"
@@ -407,7 +407,7 @@ const GardenEnquiryForm = () => {
 												)}
 											</span>
 											<span
-												className={`text-lg ${
+												className={`text-base sm:text-lg ${
 													formData.journeyStage === option.id
 														? "text-white"
 														: "text-plum"
@@ -422,13 +422,13 @@ const GardenEnquiryForm = () => {
 							{/* Step 3 - Contact Details */}
 							<div
 								className={`w-full transition-all duration-500 ease-in-out ${getSlideClasses(3)}`}>
-								<h3 className="font-display text-2xl md:text-3xl font-medium text-plum mb-2">
+								<h3 className="font-display text-xl sm:text-2xl md:text-3xl font-medium text-plum mb-2">
 									Your contact details
 								</h3>
-								<p className="text-plum/60 mb-8">
+								<p className="text-plum/60 text-sm sm:text-base mb-5 sm:mb-6 md:mb-8">
 									We&apos;ll use these to get in touch
 								</p>
-								<div className="space-y-5">
+								<div className="space-y-4 sm:space-y-5">
 									{/* Row 1: Name - full width */}
 									<div className="w-full">
 										<label
@@ -443,7 +443,7 @@ const GardenEnquiryForm = () => {
 											value={formData.name}
 											onChange={handleInputChange}
 											required
-											className="w-full px-4 py-3.5 rounded-xl bg-sage/20 border-2 border-plum/30 text-plum placeholder-plum/40 focus:outline-none focus:border-plum transition-colors"
+											className="w-full px-3 sm:px-4 py-3 sm:py-3.5 rounded-xl bg-sage/20 border-2 border-plum/30 text-plum placeholder-plum/40 focus:outline-none focus:border-plum transition-colors text-base"
 											placeholder="Your full name"
 										/>
 									</div>
@@ -461,12 +461,12 @@ const GardenEnquiryForm = () => {
 											value={formData.email}
 											onChange={handleInputChange}
 											required
-											className="w-full px-4 py-3.5 rounded-xl bg-sage/20 border-2 border-plum/30 text-plum placeholder-plum/40 focus:outline-none focus:border-plum transition-colors"
+											className="w-full px-3 sm:px-4 py-3 sm:py-3.5 rounded-xl bg-sage/20 border-2 border-plum/30 text-plum placeholder-plum/40 focus:outline-none focus:border-plum transition-colors text-base"
 											placeholder="your@email.com"
 										/>
 									</div>
 									{/* Row 3: Phone | Postcode */}
-									<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+									<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
 										<div>
 											<label
 												htmlFor="phone"
@@ -480,7 +480,7 @@ const GardenEnquiryForm = () => {
 												value={formData.phone}
 												onChange={handleInputChange}
 												required
-												className="w-full px-4 py-3.5 rounded-xl bg-sage/20 border-2 border-plum/30 text-plum placeholder-plum/40 focus:outline-none focus:border-plum transition-colors"
+												className="w-full px-3 sm:px-4 py-3 sm:py-3.5 rounded-xl bg-sage/20 border-2 border-plum/30 text-plum placeholder-plum/40 focus:outline-none focus:border-plum transition-colors text-base"
 												placeholder="Your phone number"
 											/>
 										</div>
@@ -497,7 +497,7 @@ const GardenEnquiryForm = () => {
 												value={formData.postcode}
 												onChange={handleInputChange}
 												required
-												className="w-full px-4 py-3.5 rounded-xl bg-sage/20 border-2 border-plum/30 text-plum placeholder-plum/40 focus:outline-none focus:border-plum transition-colors"
+												className="w-full px-3 sm:px-4 py-3 sm:py-3.5 rounded-xl bg-sage/20 border-2 border-plum/30 text-plum placeholder-plum/40 focus:outline-none focus:border-plum transition-colors text-base"
 												placeholder="e.g. SW1A 1AA"
 											/>
 										</div>
@@ -508,8 +508,8 @@ const GardenEnquiryForm = () => {
 
 						{/* No pressure - lower right, above line (Step 3 only) */}
 						{currentStep === 3 && (
-							<div className="flex justify-end mt-8">
-								<p className="text-plum/60 text-sm">
+							<div className="flex justify-end mt-5 sm:mt-8">
+								<p className="text-plum/60 text-xs sm:text-sm">
 									No pressure. Just an initial conversation.
 								</p>
 							</div>
@@ -517,14 +517,14 @@ const GardenEnquiryForm = () => {
 
 						{/* Navigation buttons */}
 						<div
-							className={`${currentStep === 3 ? "mt-2" : currentStep === 2 ? "mt-10" : "mt-8"} flex items-center justify-between pt-4 border-t border-plum/20 `}>
+							className={`${currentStep === 3 ? "mt-2" : currentStep === 2 ? "mt-6 sm:mt-10" : "mt-6 sm:mt-8"} flex items-center justify-between pt-4 border-t border-plum/20 `}>
 							<button
 								type="button"
 								onClick={goToPreviousStep}
-								className={`flex items-center gap-2 px-6 py-3 rounded-full text-plum/70 hover:text-plum transition-all cursor-pointer ${
+								className={`flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full text-plum/70 hover:text-plum transition-all cursor-pointer text-sm sm:text-base ${
 									currentStep === 1 ? "opacity-0 pointer-events-none" : ""
 								}`}>
-								<ChevronLeft className="w-5 h-5" />
+								<ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
 								<span>Back</span>
 							</button>
 							{currentStep < 3 ? (
@@ -535,16 +535,16 @@ const GardenEnquiryForm = () => {
 										(currentStep === 1 && !canProceedStep1) ||
 										(currentStep === 2 && !canProceedStep2)
 									}
-									className="flex items-center gap-2 px-8 py-3.5 rounded-full bg-plum text-white font-medium hover:bg-plum/90 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+									className="flex items-center gap-2 px-5 sm:px-6 md:px-8 py-2.5 sm:py-3.5 rounded-full bg-plum text-white font-medium hover:bg-plum/90 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base">
 									<span>Continue</span>
-									<ChevronRight className="w-5 h-5" />
+									<ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
 								</button>
 							) : (
 								<div className="text-right">
 									<button
 										type="submit"
 										disabled={!canSubmit || isSubmitting}
-										className="flex items-center gap-2 px-8 py-3.5 rounded-full bg-plum text-white font-medium hover:bg-plum/90 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+										className="flex items-center gap-2 px-5 sm:px-6 md:px-8 py-2.5 sm:py-3.5 rounded-full bg-plum text-white font-medium hover:bg-plum/90 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base">
 										{isSubmitting ? (
 											<>
 												<svg

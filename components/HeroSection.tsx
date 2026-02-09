@@ -46,9 +46,9 @@ const HeroSection = () => {
 	}, []);
 
 	return (
-		<section className="relative min-h-screen overflow-hidden bg-white flex flex-col">
-			{/* Full-bleed background images - stacked with crossfade */}
-			<div className="absolute top-0 right-0 w-full lg:w-[55%] h-full">
+		<section className="relative min-h-screen overflow-hidden bg-white flex flex-col px-4 sm:px-6 md:px-8 lg:px-0">
+			{/* Full-bleed background images - stacked with crossfade (hidden on mobile) */}
+			<div className="hidden lg:block absolute top-0 right-0 w-full lg:w-[55%] h-full">
 				{HERO_IMAGES.map((src, index) => (
 					<Image
 						key={src}
@@ -81,24 +81,9 @@ const HeroSection = () => {
 				</div>
 			</div>
 
-			{/* Top bar with logo */}
-			<div className="relative z-10 w-full max-w-[1400px] mx-auto px-8 md:px-16 pt-6 lg:pt-8">
-				<div
-					className="flex items-center justify-between animate-fade-in"
-					style={{ animationDelay: "0s" }}>
-					<Image
-						src="/logo.png"
-						alt="Gaia Crafted Landscapes"
-						width={120}
-						height={96}
-						className="h-20 sm:h-24 w-auto"
-					/>
-				</div>
-			</div>
-
 			{/* Phone + social icons - top right */}
 			<div
-				className="absolute top-6 lg:top-8 right-6 sm:right-10 z-20 flex items-center gap-4 animate-fade-in"
+				className="absolute top-4 sm:top-6 lg:top-8 right-4 sm:right-6 md:right-10 z-20 flex items-center gap-3 sm:gap-4 animate-fade-in"
 				style={{ animationDelay: "0.5s" }}>
 				<a
 					href="tel:+447903533879"
@@ -124,8 +109,23 @@ const HeroSection = () => {
 				</div>
 			</div>
 
+			{/* Top bar with logo */}
+			<div className="relative z-10 w-full max-w-[1400px] mx-auto px-0 lg:px-16 pt-20 sm:pt-20 lg:pt-8">
+				<div
+					className="flex items-center justify-between animate-fade-in"
+					style={{ animationDelay: "0s" }}>
+					<Image
+						src="/logo.png"
+						alt="Gaia Crafted Landscapes"
+						width={120}
+						height={96}
+						className="h-20 sm:h-24 w-auto"
+					/>
+				</div>
+			</div>
+
 			{/* Left content */}
-			<div className="relative z-10 w-full max-w-[1400px] mx-auto px-8 md:px-16 pb-16 flex-1 flex items-center">
+			<div className="relative z-10 w-full max-w-[1400px] mx-auto px-0 lg:px-16 pb-12 sm:pb-16 flex-1 flex items-center">
 				<div className="flex flex-col gap-8 max-w-xl">
 					{/* Badge */}
 					<div

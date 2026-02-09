@@ -80,7 +80,7 @@ const ProjectCard = ({
 									isPlum ? "" : "flex-col-reverse"
 								}`}>
 								<div
-									className={`h-14 shrink-0 ${isPlum ? "bg-plum" : "bg-sage-light"}`}
+									className={`h-8 md:h-14 shrink-0 ${isPlum ? "bg-plum" : "bg-sage-light"}`}
 								/>
 								<div className="relative flex-1 min-h-0 overflow-hidden rounded-2xl group">
 									<Image
@@ -92,10 +92,10 @@ const ProjectCard = ({
 									<div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
 								</div>
 								<span
-									className={`absolute left-5 inline-flex items-center px-10 py-4 rounded-full text-base font-semibold uppercase tracking-[0.15em] bg-charcoal/85 text-white backdrop-blur-md border border-white/10 z-10 pointer-events-none ${
+									className={`absolute left-5 inline-flex items-center px-6 md:px-10 py-2 md:py-4 rounded-full text-sm md:text-base font-semibold uppercase tracking-[0.15em] bg-charcoal/85 text-white backdrop-blur-md border border-white/10 z-10 pointer-events-none ${
 										isPlum
-											? "top-14 -translate-y-1/2"
-											: "bottom-14 translate-y-1/2"
+											? "top-8 md:top-14 -translate-y-1/2"
+											: "bottom-8 md:bottom-14 translate-y-1/2"
 									}`}>
 									Before
 								</span>
@@ -105,7 +105,7 @@ const ProjectCard = ({
 									isPlum ? "flex-col-reverse" : ""
 								}`}>
 								<div
-									className={`h-14 shrink-0 ${isPlum ? "bg-plum" : "bg-sage-light"}`}
+									className={`h-8 md:h-14 shrink-0 ${isPlum ? "bg-plum" : "bg-sage-light"}`}
 								/>
 								<div className="relative flex-1 min-h-0 overflow-hidden rounded-2xl group">
 									<Image
@@ -117,10 +117,10 @@ const ProjectCard = ({
 									<div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 								</div>
 								<span
-									className={`absolute left-5 inline-flex items-center px-10 py-4 rounded-full text-base font-semibold uppercase tracking-[0.15em] bg-gold/80 text-white backdrop-blur-lg border border-gold/30 z-10 pointer-events-none ${
+									className={`absolute left-5 inline-flex items-center px-6 md:px-10 py-2 md:py-4 rounded-full text-sm md:text-base font-semibold uppercase tracking-[0.15em] bg-gold/80 text-white backdrop-blur-lg border border-gold/30 z-10 pointer-events-none ${
 										isPlum
-											? "bottom-14 translate-y-1/2"
-											: "top-14 -translate-y-1/2"
+											? "bottom-8 md:bottom-14 translate-y-1/2"
+											: "top-8 md:top-14 -translate-y-1/2"
 									}`}>
 									After
 								</span>
@@ -138,7 +138,7 @@ interface ProjectsStackSectionProps {
 }
 
 export const ProjectsStackSection = ({ projects }: ProjectsStackSectionProps) => (
-	<div className="px-4 md:px-8 overflow-visible">
+	<div className="px-0 sm:px-4 md:px-8 overflow-visible">
 		{projects.map((project, index) => (
 			<ProjectCard
 				key={project.id}

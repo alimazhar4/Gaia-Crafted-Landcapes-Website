@@ -63,9 +63,9 @@ const QualificationSection = () => {
 	return (
 		<section
 			id="qualification"
-			className="py-28 md:py-36 bg-sage-light overflow-hidden">
+			className="py-16 sm:py-20 md:py-28 lg:py-36 bg-sage-light overflow-visible px-4 sm:px-6 md:px-0">
 			{/* Qualification Header */}
-			<div className="max-w-[1400px] mx-auto px-8 md:px-16 mb-20 md:mb-24">
+			<div className="max-w-[1400px] mx-auto px-0 md:px-16 mb-12 sm:mb-16 md:mb-20 lg:mb-24">
 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-20 items-start">
 					{/* Left column - 1/3 */}
 					<div className="lg:col-span-1">
@@ -101,13 +101,13 @@ const QualificationSection = () => {
 				</div>
 			</div>
 
-			{/* Infinite scrolling image carousel - full width */}
-			<div className="relative w-full mb-24 md:mb-32 overflow-hidden">
-				<div className="flex w-max animate-scroll-left">
+			{/* Infinite scrolling image carousel - full width (full-bleed on mobile) */}
+			<div className="relative w-[100vw] max-w-none left-1/2 -translate-x-1/2 md:w-full md:left-0 md:translate-x-0 mb-16 sm:mb-20 md:mb-24 lg:mb-32 overflow-hidden">
+				<div className="flex w-max animate-scroll-left pl-4 sm:pl-6 md:pl-0">
 					{images.map((img, index) => (
 						<div
 							key={`first-${index}`}
-							className="relative flex-shrink-0 w-[300px] md:w-[400px] h-[350px] md:h-[450px] mx-2 md:mx-3 rounded-2xl overflow-hidden shadow-lg shadow-black/10">
+							className="relative flex-shrink-0 w-[260px] sm:w-[300px] md:w-[400px] h-[300px] sm:h-[350px] md:h-[450px] mx-1.5 sm:mx-2 md:mx-3 rounded-2xl overflow-hidden shadow-lg shadow-black/10">
 							<Image
 								src={img}
 								alt={`Landscape design project ${index + 1}`}
@@ -120,7 +120,7 @@ const QualificationSection = () => {
 					{images.map((img, index) => (
 						<div
 							key={`second-${index}`}
-							className="relative flex-shrink-0 w-[300px] md:w-[400px] h-[350px] md:h-[450px] mx-2 md:mx-3 rounded-2xl overflow-hidden shadow-lg shadow-black/10">
+							className="relative flex-shrink-0 w-[260px] sm:w-[300px] md:w-[400px] h-[300px] sm:h-[350px] md:h-[450px] mx-1.5 sm:mx-2 md:mx-3 rounded-2xl overflow-hidden shadow-lg shadow-black/10">
 							<Image
 								src={img}
 								alt={`Landscape design project ${index + 1}`}
@@ -134,8 +134,8 @@ const QualificationSection = () => {
 			</div>
 
 			{/* Stats */}
-			<div className="max-w-[1400px] mx-auto px-8 md:px-16">
-				<div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+			<div className="max-w-[1400px] mx-auto px-0 md:px-16">
+				<div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
 					{stats.map((stat, index) => (
 						<div key={index} className="space-y-2">
 							<span className="font-display text-5xl md:text-6xl lg:text-7xl font-light text-gold">
