@@ -209,10 +209,12 @@ const GardenEnquiryForm = () => {
 
 	const handleProjectSelect = (projectType: ProjectType) => {
 		setFormData((prev) => ({ ...prev, projectType }));
+		goToNextStep();
 	};
 
 	const handleJourneySelect = (journeyStage: JourneyStage) => {
 		setFormData((prev) => ({ ...prev, journeyStage }));
+		goToNextStep();
 	};
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

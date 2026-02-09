@@ -102,9 +102,9 @@ const createCardPool = (): Card[] => {
 	return pool;
 };
 
-const ROW1_SLIDE_DURATION = 60;
-const ROW2_SLIDE_DURATION = 80;
-const ROW3_SLIDE_DURATION = 70;
+const ROW1_SLIDE_DURATION = 140;
+const ROW2_SLIDE_DURATION = 170;
+const ROW3_SLIDE_DURATION = 120;
 
 // Review card component
 const ReviewCard = ({ review }: { review: (typeof reviews)[0] }) => {
@@ -171,8 +171,20 @@ const ImageCard = ({ src, alt }: { src: string; alt: string }) => {
 const MovingReviewSection = () => {
 	const pool = createCardPool();
 
+	// Filter out Michael Edwards (charcoal variant) for mobile display
+	const mobileReviews = reviews.filter(
+		(review) => review.variant !== "charcoal",
+	);
+
 	// Distribute cards across rows (circular pattern)
 	const row1Cards = [
+		pool[0], // review
+		pool[5], // image
+		pool[1], // review
+		pool[6], // image
+		pool[2], // review
+		pool[7], // image
+
 		pool[0], // review
 		pool[5], // image
 		pool[1], // review
@@ -187,10 +199,20 @@ const MovingReviewSection = () => {
 		pool[9], // image
 		pool[4], // review
 		pool[0], // review (loop back)
+
+		pool[8], // image
+		pool[3], // review
+		pool[9], // image
+		pool[4], // review
+		pool[0], // review (loop back)
 	];
 
 	const row3Cards = [
-		pool[10], // image
+		pool[1], // review
+		pool[6], // image
+		pool[3], // review
+		pool[7], // image
+
 		pool[1], // review
 		pool[6], // image
 		pool[3], // review
@@ -221,10 +243,120 @@ const MovingReviewSection = () => {
 						<span className="text-white/80">stories told by our clients</span>
 					</motion.h2>
 				</div>
+
+				{/* Mobile Static Grid Layout */}
+				<div className="md:hidden space-y-3 sm:space-y-4 mb-10">
+					{/* Row 1 - Stat Block */}
+					<motion.div
+						className="bg-plum rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[200px] border-2 border-white/40"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.48, delay: 0.2 }}>
+						<div className="flex flex-col gap-2 sm:gap-3">
+							<div className="flex -space-x-2">
+								{[1, 2, 3, 4].map((i) => (
+									<div
+										key={i}
+										className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-sage/30 border-2 border-plum flex items-center justify-center">
+										<span className="text-white/80 text-xs font-medium">
+											{["SS", "R", "JT", "ME"][i - 1]}
+										</span>
+									</div>
+								))}
+							</div>
+							<div className="flex gap-1">
+								{[1, 2, 3, 4, 5].map((i) => (
+									<Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-gold text-gold" />
+								))}
+							</div>
+						</div>
+						<div>
+							<p className="font-display text-3xl sm:text-4xl font-semibold text-gold mb-1">
+								5.0 / 5.0
+							</p>
+							<p className="text-gold/90 text-xs sm:text-sm font-medium">
+								Average client rating
+							</p>
+						</div>
+					</motion.div>
+
+					{/* Mobile Review Cards - custom sequence (exclude charcoal) */}
+					{(() => {
+						// Desired mobile order: 1, 4, 2, 3 -> with charcoal removed this becomes 1, 5, 2, 3
+						const mobileOrder = [1, 5, 2, 3];
+						const displayReviews = mobileOrder
+							.map((id) => mobileReviews.find((r) => r.id === id))
+							.filter(Boolean) as typeof mobileReviews;
+
+						return displayReviews.map((review, index) => {
+							const bgColor =
+								review.variant === "white" ? "bg-white" : "bg-sage-light";
+							const textColor = "text-plum/80";
+							const nameColor = "text-plum";
+							const locationColor = "text-plum/50";
+							const quoteColor =
+								review.variant === "white" ? "text-sage" : "text-plum/30";
+
+							return (
+								<motion.div
+									key={review.id}
+									className={`${bgColor} rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[180px] border-2 border-white/40`}
+									initial={{ opacity: 0, y: 30 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									viewport={{ once: true }}
+									transition={{ duration: 0.48, delay: 0.25 + index * 0.1 }}>
+									<div>
+										<div className="flex gap-0.5 mb-2 sm:mb-3">
+											{[1, 2, 3, 4, 5].map((i) => (
+												<Star
+													key={i}
+													className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-gold text-gold"
+												/>
+											))}
+										</div>
+										<p className={`${textColor} leading-relaxed text-xs sm:text-sm`}>
+											&quot;{review.quote}&quot;
+										</p>
+									</div>
+									<div className="flex items-center justify-between">
+										<div>
+											<p className={`font-medium ${nameColor} text-xs sm:text-sm`}>
+												{review.name}
+											</p>
+											{review.location && (
+												<p className={`${locationColor} text-xs`}>{review.location}</p>
+											)}
+										</div>
+										<Quote className={`w-5 h-5 sm:w-6 sm:h-6 ${quoteColor}`} />
+									</div>
+								</motion.div>
+							);
+						});
+					})()}
+
+					{/* Projects Delivered Stat */}
+					<motion.div
+						className="bg-plum rounded-2xl p-4 sm:p-6 flex flex-col justify-between min-h-[160px] border-2 border-white/40"
+						initial={{ opacity: 0, y: 30 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.48, delay: 0.65 }}>
+						<p className="text-white/60 text-xs">Projects delivered</p>
+						<div>
+							<p className="font-display text-3xl sm:text-4xl font-semibold text-gold">
+								50+
+							</p>
+							<p className="text-gold text-xs sm:text-sm font-medium mt-1">
+								Gardens created
+							</p>
+						</div>
+					</motion.div>
+				</div>
 			</div>
 
-			{/* Scrolling Rows - Full Width */}
-			<div className="w-full space-y-3 sm:space-y-4 md:space-y-5">
+			{/* Desktop Scrolling Rows - Full Width (hidden on mobile) */}
+			<div className="hidden md:block w-full space-y-3 sm:space-y-4 md:space-y-5">
 				{/* Row 1: Rating stat (fixed left) + scrolling cards (right) */}
 				<div className="flex gap-3 sm:gap-4 md:gap-5">
 					{/* Fixed stat block */}

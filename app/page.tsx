@@ -1,6 +1,5 @@
 import HeroSection from "@/components/HeroSection";
 import QualificationSection from "@/components/QualificationSection";
-import ReviewsSection from "@/components/ReviewsSection";
 import MovingReviewSection from "@/components/MovingReviewSection";
 import GaiaCraftedWaySection from "@/components/GaiaCraftedWaySection";
 import OurWorkSection from "@/components/OurWorkSection";
@@ -18,7 +17,6 @@ export default function Home() {
 			<GaiaCraftedWaySection />
 			<GardenEnquiryForm />
 			<ReassuranceSection />
-			{/* <ReviewsSection /> */}
 			<MovingReviewSection />
 			<FinalCTASection />
 			<Footer />
