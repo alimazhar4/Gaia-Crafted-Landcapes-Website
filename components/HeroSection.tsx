@@ -121,11 +121,13 @@ const HeroSection = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.48, delay: 0 }}>
 					<Image
-						src="/logo.png"
+						src="/Logo (2).png"
 						alt="Gaia Crafted Landscapes"
 						width={120}
 						height={96}
-						className="h-20 sm:h-24 w-auto"
+						className="h-24 sm:h-32 w-auto"
+						// quality={100}
+						unoptimized={true}
 					/>
 				</motion.div>
 			</div>

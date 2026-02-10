@@ -39,14 +39,14 @@ const stats = [
 		description: "Improving outdoor spaces with expert craftsmanship for years",
 	},
 	{
-		value: "26",
+		value: "150",
 		label: "Projects completed",
-		description: "Over 250 successful projects delivered with quality and care",
+		description: "Over 150 successful projects delivered with quality and care",
 	},
 	{
-		value: "30",
+		value: "10",
 		label: "Skilled Tradespeople",
-		description: "Our team of 30 experts ensures top-quality results",
+		description: "Our team of 10 experts ensures top-quality results",
 	},
 	{
 		value: "100%",
