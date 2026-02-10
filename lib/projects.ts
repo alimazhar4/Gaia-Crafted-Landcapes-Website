@@ -18,7 +18,6 @@ export const projects: Project[] = [
 	{ id: "chepstow-fc-2", title: "Chepstow Finches Close Image 2", imageBefore: "/Chepstow Finches Close/Before2.JPG", imageAfter: "/Chepstow Finches Close/After2.JPG", cardTheme: "plum" },
 	{ id: "chepstow-slp-1", title: "Chepstow St Laurence Park Image 1", imageBefore: "/Chepstow St Laurence Park/Before1.JPG", imageAfter: "/Chepstow St Laurence Park/After1.JPG", cardTheme: "sage" },
 	{ id: "chepstow-slp-2", title: "Chepstow St Laurence Park Image 2", imageBefore: "/Chepstow St Laurence Park/Before2.JPG", imageAfter: "/Chepstow St Laurence Park/After2.JPG", cardTheme: "plum" },
-	{ id: "chepstow-slp-3", title: "Chepstow St Laurence Park Image 3", imageBefore: "/Chepstow St Laurence Park/Before3.JPG", imageAfter: "/Chepstow St Laurence Park/After3.JPG", cardTheme: "sage" },
 	{ id: "chepstow-slp-4", title: "Chepstow St Laurence Park Image 4", imageBefore: "/Chepstow St Laurence Park/Before4.JPG", imageAfter: "/Chepstow St Laurence Park/After4.JPG", cardTheme: "plum" },
 	{ id: "coleford-1", title: "Coleford Image 1", imageBefore: "/Coleford/Before1.JPG", imageAfter: "/Coleford/After1.JPG", cardTheme: "sage" },
 	{ id: "coleford-2", title: "Coleford Image 2", imageBefore: "/Coleford/Before2.JPG", imageAfter: "/Coleford/After2.JPG", cardTheme: "plum" },

@@ -8,7 +8,7 @@ const reviews = [
 	{
 		id: 1,
 		name: "Sarah Stylianou",
-		location: "Chepstow, Monmouthshire",
+		location: "Sully, Vale of Glamorgan",
 		quote:
 			"Great company, Richy has amazing ideas for garden designs very professional and would definitely recommend to anyone interested.",
 		variant: "white" as const,
@@ -16,7 +16,7 @@ const reviews = [
 	{
 		id: 2,
 		name: "Robert",
-		location: "Caldicot, Newport",
+		location: "Abergavenny, Monmouthshire",
 		quote:
 			"Richie is a very hardworking and skilled landscaper. He transformed our garden. We can highly recommend him.",
 		variant: "white" as const,
@@ -24,7 +24,7 @@ const reviews = [
 	{
 		id: 3,
 		name: "James & Emma T.",
-		location: "Richmond, Surrey",
+		location: "Lisvane, Cardiff",
 		quote:
 			"From the first consultation to the final plant, everything was handled with care. Our outdoor space has become our favorite room.",
 		variant: "sage" as const,
@@ -32,7 +32,7 @@ const reviews = [
 	{
 		id: 4,
 		name: "Michael Edwards",
-		location: "Kensington, London",
+		location: "Newport, Gwent",
 		quote:
 			"The design-led approach really sets Gaia Crafted apart. They created a space that feels both timeless and perfectly suited to how we live.",
 		variant: "charcoal" as const,
@@ -40,7 +40,7 @@ const reviews = [
 	{
 		id: 5,
 		name: "Sophie Baron",
-		location: "Abergavenny, Gwent",
+		location: "Tongwynlais, Cardiff",
 		quote: "Great company. Friendly and professional service.",
 		variant: "sage" as const,
 	},
@@ -345,7 +345,7 @@ const MovingReviewSection = () => {
 						<p className="text-white/60 text-xs">Projects delivered</p>
 						<div>
 							<p className="font-display text-3xl sm:text-4xl font-semibold text-gold">
-								50+
+								150+
 							</p>
 							<p className="text-gold text-xs sm:text-sm font-medium mt-1">
 								Gardens created
@@ -492,7 +492,7 @@ const MovingReviewSection = () => {
 						<p className="text-white/60 text-xs">Projects delivered</p>
 						<div>
 							<p className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-gold">
-								50+
+								150+
 							</p>
 							<p className="text-gold text-xs sm:text-sm font-medium mt-1">
 								Gardens created
