@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cormorantGaramond, inter } from "./fonts";
 import "./globals.css";
 import "lenis/dist/lenis.css";
+import { Toaster } from "sonner";
 import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({
 			<body
 				className={`${cormorantGaramond.variable} ${inter.variable} antialiased`}>
 				<SmoothScroll>{children}</SmoothScroll>
+				<Toaster position="bottom-right" />
 			</body>
 		</html>
 	);

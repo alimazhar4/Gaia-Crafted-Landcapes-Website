@@ -4,28 +4,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { ChevronRight, ChevronLeft, Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
+import { ProjectType, JourneyStage, FormData } from "@/lib/types";
 
 const enquiryBgImage = "/Thornbury/IMG_1325.JPG";
-
-type ProjectType =
-	| "full-landscaping"
-	| "planters-pergolas"
-	| "garden-design"
-	| "patio-paving"
-	| "fencing"
-	| "driveway"
-	| "garden-room";
-
-type JourneyStage = "planning" | "only-quote" | "multiple-quotes" | "ready";
-
-interface FormData {
-	projectType: ProjectType | null;
-	journeyStage: JourneyStage | null;
-	name: string;
-	phone: string;
-	email: string;
-	postcode: string;
-}
 
 const projectOptions: {
 	id: ProjectType;
@@ -225,9 +207,32 @@ const GardenEnquiryForm = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setIsSubmitting(true);
-		await new Promise((resolve) => setTimeout(resolve, 1500));
-		setIsSubmitting(false);
-		setIsSubmitted(true);
+		try {
+			const response = await fetch("/api/capture-lead", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(formData),
+			});
+
+			if (response.ok) {
+				setIsSubmitting(false);
+				toast.success("Thank you! We'll be in touch within 24 hours.");
+				setIsSubmitted(true);
+			} else {
+				const error = await response.json();
+				console.error("Error submitting form:", error);
+				setIsSubmitting(false);
+				toast.error(
+					"There was an error submitting your enquiry. Please try again.",
+				);
+			}
+		} catch (error) {
+			console.error("Error:", error);
+			setIsSubmitting(false);
+			toast.error("There was an error submitting your enquiry. Please try again.");
+		}
 	};
 
 	const canProceedStep1 = formData.projectType !== null;
