@@ -53,7 +53,7 @@ export async function POST(request: Request) {
           <!-- Header -->
           <div class="header">
             <div class="logo">
-              <img src="${process.env.NEXT_PUBLIC_BASE_URL}/Logo%20(2).png" alt="Gaia Crafted Landscapes" />
+              <img src="https://lp.gaiacraftedlandscapes.co.uk/Logo%20(2).png" alt="Gaia Crafted Landscapes" />
             </div>
             <h1 class="title">New Garden Enquiry Received</h1>
             <p class="subtitle">A potential client has submitted their garden project details</p>
@@ -169,7 +169,7 @@ export async function POST(request: Request) {
           <!-- Header -->
           <div class="header">
             <div class="logo">
-              <img src="${process.env.NEXT_PUBLIC_BASE_URL}/Logo%20(2).png" alt="Gaia Crafted Landscapes" />
+              <img src="https://lp.gaiacraftedlandscapes.co.uk/Logo%20(2).png" alt="Gaia Crafted Landscapes" />
             </div>
             <h1 class="title">Thank You for Your Enquiry</h1>
             <p class="subtitle">We're excited to help bring your garden vision to life</p>
