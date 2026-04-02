@@ -1,23 +1,36 @@
-import nodemailer from 'nodemailer';
-import { SubmittedFormData } from '@/lib/types';
+import nodemailer from "nodemailer";
+
+import {
+	escapeHtml,
+	FormValidationError,
+	formatJourneyStage,
+	formatProjectType,
+	parseSubmittedFormData,
+} from "@/lib/garden-enquiry";
+import { syncGardenEnquiryToJobber } from "@/lib/jobber";
 
 export async function POST(request: Request) {
-  try {
-    const formData: SubmittedFormData = await request.json();
+	try {
+		const formData = parseSubmittedFormData(await request.json());
 
-    // Create transporter using SMTP credentials from environment variables
-    const transporter = nodemailer.createTransport({
-      host: process.env.MAIL_SERVER,
-      port: parseInt(process.env.MAIL_PORT || '465'),
-      secure: process.env.MAIL_PORT === '465', // true for 465, false for other ports
-      auth: {
-        user: process.env.MAIL_USERNAME,
-        pass: process.env.MAIL_PASSWORD,
-      },
-    });
+		const transporter = nodemailer.createTransport({
+			host: process.env.MAIL_SERVER,
+			port: parseInt(process.env.MAIL_PORT || "465", 10),
+			secure: process.env.MAIL_PORT === "465",
+			auth: {
+				user: process.env.MAIL_USERNAME,
+				pass: process.env.MAIL_PASSWORD,
+			},
+		});
 
-    // Email to Gaia Crafted Landscapes
-    const businessEmailContent = `
+		const safeName = escapeHtml(formData.name);
+		const safeEmail = escapeHtml(formData.email);
+		const safePhone = escapeHtml(formData.phone);
+		const safePostcode = escapeHtml(formData.postcode);
+		const projectTypeLabel = formatProjectType(formData.projectType);
+		const journeyStageLabel = formatJourneyStage(formData.journeyStage);
+
+		const businessEmailContent = `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -50,7 +63,6 @@ export async function POST(request: Request) {
       </head>
       <body>
         <div class="container">
-          <!-- Header -->
           <div class="header">
             <div class="logo">
               <img src="https://lp.gaiacraftedlandscapes.co.uk/Logo%20(2).png" alt="Gaia Crafted Landscapes" />
@@ -59,53 +71,48 @@ export async function POST(request: Request) {
             <p class="subtitle">A potential client has submitted their garden project details</p>
           </div>
 
-          <!-- Content -->
           <div class="content">
-            <!-- Customer Information -->
             <div class="section">
               <h2 class="section-title">Customer Information</h2>
               <div class="info-grid">
                 <div class="info-row">
                   <div class="info-label">Full Name</div>
-                  <div class="info-value">${formData.name}</div>
+                  <div class="info-value">${safeName}</div>
                 </div>
                 <div class="info-row">
                   <div class="info-label">Email Address</div>
-                  <div class="info-value">${formData.email}</div>
+                  <div class="info-value">${safeEmail}</div>
                 </div>
                 <div class="info-row">
                   <div class="info-label">Phone Number</div>
-                  <div class="info-value">${formData.phone}</div>
+                  <div class="info-value">${safePhone}</div>
                 </div>
                 <div class="info-row">
                   <div class="info-label">Postcode</div>
-                  <div class="info-value">${formData.postcode}</div>
+                  <div class="info-value">${safePostcode}</div>
                 </div>
               </div>
             </div>
 
-            <!-- Project Details -->
             <div class="section">
               <h2 class="section-title">Project Details</h2>
               <div class="qa-section">
                 <div style="margin-bottom: 20px;">
                   <div class="question">What type of garden project are they interested in?</div>
-                  <div class="answer">${formatProjectType(formData.projectType)}</div>
+                  <div class="answer">${escapeHtml(projectTypeLabel)}</div>
                 </div>
                 <div style="margin-bottom: 20px;">
                   <div class="question">Where are they in their garden renovation journey?</div>
-                  <div class="answer">${formatJourneyStage(formData.journeyStage)}</div>
+                  <div class="answer">${escapeHtml(journeyStageLabel)}</div>
                 </div>
               </div>
             </div>
 
-            <!-- Action Items -->
             <div class="highlight">
-              <strong>Next Steps:</strong> Please contact ${formData.name} within 24 hours to discuss their garden project requirements and schedule a consultation.
+              <strong>Next Steps:</strong> Please contact ${safeName} within 24 hours to discuss their garden project requirements and schedule a consultation.
             </div>
           </div>
 
-          <!-- Footer -->
           <div class="footer">
             <p class="footer-text">
               This enquiry was submitted via the Gaia Crafted Landscapes website<br>
@@ -117,16 +124,14 @@ export async function POST(request: Request) {
       </html>
     `;
 
-    // Send email to business
-    await transporter.sendMail({
-      from: process.env.MAIL_USERNAME,
-      to: process.env.BUSINESS_EMAIL,
-      subject: `New Garden Enquiry: ${formData.name} - ${formatProjectType(formData.projectType)}`,
-      html: businessEmailContent,
-    });
+		await transporter.sendMail({
+			from: process.env.MAIL_USERNAME,
+			to: process.env.BUSINESS_EMAIL,
+			subject: `New Garden Enquiry: ${formData.name} - ${projectTypeLabel}`,
+			html: businessEmailContent,
+		});
 
-    // Send confirmation email to customer
-    const customerEmailContent = `
+		const customerEmailContent = `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -147,26 +152,16 @@ export async function POST(request: Request) {
           .highlight-box { background-color: #c5d0c6; border-radius: 12px; padding: 25px; margin: 25px 0; border-left: 4px solid #ae8420; }
           .highlight-title { color: #41273b; font-size: 20px; font-weight: 600; margin-bottom: 15px; }
           .highlight-text { color: #000000; line-height: 1.6; margin: 0; font-size: 16px; }
-          .steps { margin: 30px 0; }
-          .step { display: flex; align-items: flex-start; margin-bottom: 20px; }
-          .step-number { background-color: #ae8420; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; margin-right: 15px; flex-shrink: 0; }
-          .step-content { flex: 1; }
-          .step-title { font-weight: 600; color: #41273b; margin-bottom: 5px; }
-          .step-description { color: #6c757d; line-height: 1.5; }
           .contact-info { background-color: #c5d0c6; border-radius: 8px; padding: 20px; margin: 25px 0; text-align: center; }
           .contact-title { color: #41273b; font-weight: 600; margin-bottom: 10px; }
           .contact-text { color: #495057; margin: 5px 0; }
           .footer { background-color: #41273b; color: white; padding: 30px; text-align: center; }
           .footer-text { margin: 0; font-size: 14px; opacity: 0.9; }
           .footer-brand { color: #ae8420; font-weight: 600; font-size: 24px; }
-          .signature { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
-          .signature-name { font-weight: 600; margin-bottom: 5px; }
-          .signature-title { opacity: 0.8; font-size: 14px; }
         </style>
       </head>
       <body>
         <div class="container">
-          <!-- Header -->
           <div class="header">
             <div class="logo">
               <img src="https://lp.gaiacraftedlandscapes.co.uk/Logo%20(2).png" alt="Gaia Crafted Landscapes" />
@@ -175,10 +170,9 @@ export async function POST(request: Request) {
             <p class="subtitle">We're excited to help bring your garden vision to life</p>
           </div>
 
-          <!-- Content -->
           <div class="content">
             <p class="greeting">
-              Dear ${formData.name},
+              Dear ${safeName},
             </p>
 
             <p class="welcome-text">
@@ -202,7 +196,6 @@ export async function POST(request: Request) {
             </p>
           </div>
 
-          <!-- Footer -->
           <div class="footer">
             <p class="footer-text">
               <span class="footer-brand">Gaia Crafted Landscapes</span><br>
@@ -214,49 +207,55 @@ export async function POST(request: Request) {
       </html>
     `;
 
-    await transporter.sendMail({
-      from: process.env.MAIL_USERNAME,
-      to: formData.email,
-      subject: 'Thank You for Your Garden Enquiry - Gaia Crafted Landscapes',
-      html: customerEmailContent,
-    });
+		await transporter.sendMail({
+			from: process.env.MAIL_USERNAME,
+			to: formData.email,
+			subject: "Thank You for Your Garden Enquiry - Gaia Crafted Landscapes",
+			html: customerEmailContent,
+		});
 
-    return Response.json({
-      success: true,
-      message: 'Enquiry submitted successfully',
-    });
-  } catch (error) {
-    console.error('Error sending email:', error);
-    return Response.json(
-      {
-        success: false,
-        message: 'Error submitting enquiry',
-        error: error instanceof Error ? error.message : 'Unknown error',
-      },
-      { status: 500 }
-    );
-  }
-}
+		let jobberResult: Awaited<ReturnType<typeof syncGardenEnquiryToJobber>> | null =
+			null;
 
-function formatProjectType(type: string): string {
-  const projectMap: Record<string, string> = {
-    'full-landscaping': 'Full Garden Landscaping',
-    'planters-pergolas': 'Planters & Pergolas',
-    'garden-design': 'Garden Design Service',
-    'patio-paving': 'Patio or Paving',
-    'fencing': 'Fencing',
-    'driveway': 'Driveway',
-    'garden-room': 'Garden Room',
-  };
-  return projectMap[type] || type;
-}
+		try {
+			jobberResult = await syncGardenEnquiryToJobber(formData);
+			if (jobberResult.warnings.length) {
+				console.warn("Jobber sync completed with warnings:", jobberResult.warnings);
+			}
+		} catch (error) {
+			console.error("Jobber sync failed:", error);
+		}
 
-function formatJourneyStage(stage: string): string {
-  const journeyMap: Record<string, string> = {
-    'planning': "I'm still planning and researching",
-    'only-quote': "This is the only quote I'm getting",
-    'multiple-quotes': "I've already received a few quotes",
-    'ready': "I'm ready to get started",
-  };
-  return journeyMap[stage] || stage;
+		return Response.json({
+			success: true,
+			message: "Enquiry submitted successfully",
+			jobber: jobberResult
+				? {
+						action: jobberResult.action,
+						warnings: jobberResult.warnings,
+					}
+				: undefined,
+		});
+	} catch (error) {
+		if (error instanceof FormValidationError) {
+			return Response.json(
+				{
+					success: false,
+					message: error.message,
+				},
+				{ status: 400 },
+			);
+		}
+
+		console.error("Error submitting enquiry:", error);
+
+		return Response.json(
+			{
+				success: false,
+				message: "Error submitting enquiry",
+				error: error instanceof Error ? error.message : "Unknown error",
+			},
+			{ status: 500 },
+		);
+	}
 }
