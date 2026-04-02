@@ -12,14 +12,22 @@ import { syncGardenEnquiryToJobber } from "@/lib/jobber";
 export async function POST(request: Request) {
 	try {
 		const formData = parseSubmittedFormData(await request.json());
+		const mailPort = parseInt(process.env.MAIL_PORT || "465", 10);
+		const rejectUnauthorized = parseBooleanEnv(
+			process.env.MAIL_TLS_REJECT_UNAUTHORIZED,
+			true,
+		);
 
 		const transporter = nodemailer.createTransport({
 			host: process.env.MAIL_SERVER,
-			port: parseInt(process.env.MAIL_PORT || "465", 10),
-			secure: process.env.MAIL_PORT === "465",
+			port: mailPort,
+			secure: mailPort === 465,
 			auth: {
 				user: process.env.MAIL_USERNAME,
 				pass: process.env.MAIL_PASSWORD,
+			},
+			tls: {
+				rejectUnauthorized,
 			},
 		});
 
@@ -258,4 +266,15 @@ export async function POST(request: Request) {
 			{ status: 500 },
 		);
 	}
+}
+
+function parseBooleanEnv(
+	value: string | undefined,
+	defaultValue: boolean,
+): boolean {
+	if (!value) {
+		return defaultValue;
+	}
+
+	return ["1", "true", "yes", "on"].includes(value.trim().toLowerCase());
 }
