@@ -34,6 +34,7 @@ export async function POST(request: Request) {
 		const safeName = escapeHtml(formData.name);
 		const safeEmail = escapeHtml(formData.email);
 		const safePhone = escapeHtml(formData.phone);
+		const safeAddress = escapeHtml(formData.address);
 		const safePostcode = escapeHtml(formData.postcode);
 		const projectTypeLabel = formatProjectType(formData.projectType);
 		const journeyStageLabel = formatJourneyStage(formData.journeyStage);
@@ -94,6 +95,10 @@ export async function POST(request: Request) {
                 <div class="info-row">
                   <div class="info-label">Phone Number</div>
                   <div class="info-value">${safePhone}</div>
+                </div>
+                <div class="info-row">
+                  <div class="info-label">Address</div>
+                  <div class="info-value">${safeAddress}</div>
                 </div>
                 <div class="info-row">
                   <div class="info-label">Postcode</div>

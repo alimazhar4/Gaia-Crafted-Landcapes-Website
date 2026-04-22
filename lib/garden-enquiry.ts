@@ -69,6 +69,7 @@ export function parseSubmittedFormData(input: unknown): SubmittedFormData {
 		name: requireText(formData.name, "Name", 120),
 		phone: requireText(formData.phone, "Phone number", 40),
 		email,
+		address: requireText(formData.address, "Address", 300),
 		postcode: requireText(formData.postcode, "Postcode", 20).toUpperCase(),
 	};
 }

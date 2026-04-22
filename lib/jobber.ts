@@ -24,6 +24,11 @@ const PLACEHOLDER_ENV_VALUES = new Set([
 
 const CUSTOM_FIELD_DEFINITIONS = [
 	{
+		key: "address",
+		name: "Website Address",
+		getValue: (formData: SubmittedFormData) => formData.address,
+	},
+	{
 		key: "postcode",
 		name: "Website Postcode",
 		getValue: (formData: SubmittedFormData) => formData.postcode,
@@ -661,9 +666,11 @@ function buildClientMutation(isEdit: boolean, variant: UpsertVariant): string {
 		"$lastName: String!",
 		"$email: String!",
 		variant.includePhone ? "$phone: String!" : null,
+		variant.includeCustomFields ? "$addressFieldId: EncodedId!" : null,
 		variant.includeCustomFields ? "$postcodeFieldId: EncodedId!" : null,
 		variant.includeCustomFields ? "$projectTypeFieldId: EncodedId!" : null,
 		variant.includeCustomFields ? "$journeyStageFieldId: EncodedId!" : null,
+		variant.includeCustomFields ? "$address: String!" : null,
 		variant.includeCustomFields ? "$postcode: String!" : null,
 		variant.includeCustomFields ? "$projectType: String!" : null,
 		variant.includeCustomFields ? "$journeyStage: String!" : null,
@@ -680,6 +687,7 @@ function buildClientMutation(isEdit: boolean, variant: UpsertVariant): string {
 			: null,
 		variant.includeCustomFields
 			? `customFields: [
+				{ customFieldConfigurationId: $addressFieldId, valueText: $address }
 				{ customFieldConfigurationId: $postcodeFieldId, valueText: $postcode }
 				{ customFieldConfigurationId: $projectTypeFieldId, valueText: $projectType }
 				{ customFieldConfigurationId: $journeyStageFieldId, valueText: $journeyStage }
@@ -755,9 +763,11 @@ function buildClientMutationVariables(
 	}
 
 	if (variant.includeCustomFields && customFieldIds) {
+		variables.addressFieldId = customFieldIds.address;
 		variables.postcodeFieldId = customFieldIds.postcode;
 		variables.projectTypeFieldId = customFieldIds.projectType;
 		variables.journeyStageFieldId = customFieldIds.journeyStage;
+		variables.address = formData.address;
 		variables.postcode = formData.postcode;
 		variables.projectType = formatProjectType(formData.projectType);
 		variables.journeyStage = formatJourneyStage(formData.journeyStage);

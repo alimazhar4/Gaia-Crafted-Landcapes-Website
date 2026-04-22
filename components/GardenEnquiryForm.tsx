@@ -171,6 +171,7 @@ const GardenEnquiryForm = () => {
 		name: "",
 		phone: "",
 		email: "",
+		address: "",
 		postcode: "",
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -238,7 +239,7 @@ const GardenEnquiryForm = () => {
 	const canProceedStep1 = formData.projectType !== null;
 	const canProceedStep2 = formData.journeyStage !== null;
 	const canSubmit =
-		formData.name && formData.email && formData.phone && formData.postcode;
+		formData.name && formData.email && formData.phone && formData.address && formData.postcode;
 
 	const getSlideClasses = (step: number) => {
 		if (step === currentStep) {
@@ -537,7 +538,25 @@ const GardenEnquiryForm = () => {
 											placeholder="your@email.com"
 										/>
 									</div>
-									{/* Row 3: Phone | Postcode */}
+									{/* Row 3: Address - full width */}
+									<div className="w-full">
+										<label
+											htmlFor="address"
+											className="block text-sm font-medium text-plum/80 mb-2">
+											Address *
+										</label>
+										<input
+											type="text"
+											id="address"
+											name="address"
+											value={formData.address}
+											onChange={handleInputChange}
+											required
+											className="w-full px-3 sm:px-4 py-3 sm:py-3.5 rounded-xl bg-sage/20 border-2 border-plum/30 text-plum placeholder-plum/40 focus:outline-none focus:border-plum transition-colors text-base"
+											placeholder="Street address, town/city"
+										/>
+									</div>
+									{/* Row 4: Phone | Postcode */}
 									<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
 										<div>
 											<label

@@ -18,6 +18,7 @@ export interface FormData {
 	name: string;
 	phone: string;
 	email: string;
+	address: string;
 	postcode: string;
 }
 
@@ -28,5 +29,6 @@ export interface SubmittedFormData {
 	name: string;
 	phone: string;
 	email: string;
+	address: string;
 	postcode: string;
 }
