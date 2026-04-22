@@ -665,26 +665,36 @@ function buildClientMutation(isEdit: boolean, variant: UpsertVariant): string {
 		"$firstName: String!",
 		"$lastName: String!",
 		"$email: String!",
+		"$address: String!",
+		"$postcode: String!",
 		variant.includePhone ? "$phone: String!" : null,
 		variant.includeCustomFields ? "$addressFieldId: EncodedId!" : null,
 		variant.includeCustomFields ? "$postcodeFieldId: EncodedId!" : null,
 		variant.includeCustomFields ? "$projectTypeFieldId: EncodedId!" : null,
 		variant.includeCustomFields ? "$journeyStageFieldId: EncodedId!" : null,
-		variant.includeCustomFields ? "$address: String!" : null,
-		variant.includeCustomFields ? "$postcode: String!" : null,
 		variant.includeCustomFields ? "$projectType: String!" : null,
 		variant.includeCustomFields ? "$journeyStage: String!" : null,
 	]
 		.filter(Boolean)
 		.join(", ");
 
+	const emailField = isEdit
+		? 'emailsToAdd: [{ description: MAIN, primary: true, address: $email }]'
+		: 'emails: [{ description: MAIN, primary: true, address: $email }]';
+
+	const phoneField = isEdit
+		? 'phonesToAdd: [{ description: MAIN, primary: true, number: $phone }]'
+		: 'phones: [{ description: MAIN, primary: true, number: $phone }]';
+
 	const inputLines = [
 		"firstName: $firstName",
 		"lastName: $lastName",
-		'emails: [{ description: MAIN, primary: true, address: $email }]',
-		variant.includePhone
-			? 'phones: [{ description: MAIN, primary: true, number: $phone }]'
-			: null,
+		emailField,
+		`billingAddress: {
+				street1: $address
+				postalCode: $postcode
+			}`,
+		variant.includePhone ? phoneField : null,
 		variant.includeCustomFields
 			? `customFields: [
 				{ customFieldConfigurationId: $addressFieldId, valueText: $address }
@@ -752,6 +762,8 @@ function buildClientMutationVariables(
 		firstName: firstName || formData.name,
 		lastName,
 		email: normalizeEmail(formData.email),
+		address: formData.address,
+		postcode: formData.postcode,
 	};
 
 	if (existingClientId) {
@@ -767,8 +779,6 @@ function buildClientMutationVariables(
 		variables.postcodeFieldId = customFieldIds.postcode;
 		variables.projectTypeFieldId = customFieldIds.projectType;
 		variables.journeyStageFieldId = customFieldIds.journeyStage;
-		variables.address = formData.address;
-		variables.postcode = formData.postcode;
 		variables.projectType = formatProjectType(formData.projectType);
 		variables.journeyStage = formatJourneyStage(formData.journeyStage);
 	}
