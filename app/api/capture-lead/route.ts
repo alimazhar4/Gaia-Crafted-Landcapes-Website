@@ -1,45 +1,45 @@
 import nodemailer from "nodemailer";
 
 import {
-	escapeHtml,
-	FormValidationError,
-	formatJourneyStage,
-	formatProjectType,
-	parseSubmittedFormData,
+  escapeHtml,
+  FormValidationError,
+  formatJourneyStage,
+  formatProjectType,
+  parseSubmittedFormData,
 } from "@/lib/garden-enquiry";
 import { syncGardenEnquiryToJobber } from "@/lib/jobber";
 
 export async function POST(request: Request) {
-	try {
-		const formData = parseSubmittedFormData(await request.json());
-		const mailPort = parseInt(process.env.MAIL_PORT || "465", 10);
-		const rejectUnauthorized = parseBooleanEnv(
-			process.env.MAIL_TLS_REJECT_UNAUTHORIZED,
-			true,
-		);
+  try {
+    const formData = parseSubmittedFormData(await request.json());
+    const mailPort = parseInt(process.env.MAIL_PORT || "465", 10);
+    const rejectUnauthorized = parseBooleanEnv(
+      process.env.MAIL_TLS_REJECT_UNAUTHORIZED,
+      true,
+    );
 
-		const transporter = nodemailer.createTransport({
-			host: process.env.MAIL_SERVER,
-			port: mailPort,
-			secure: mailPort === 465,
-			auth: {
-				user: process.env.MAIL_USERNAME,
-				pass: process.env.MAIL_PASSWORD,
-			},
-			tls: {
-				rejectUnauthorized,
-			},
-		});
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_SERVER,
+      port: mailPort,
+      secure: mailPort === 465,
+      auth: {
+        user: process.env.MAIL_USERNAME,
+        pass: process.env.MAIL_PASSWORD,
+      },
+      tls: {
+        rejectUnauthorized,
+      },
+    });
 
-		const safeName = escapeHtml(formData.name);
-		const safeEmail = escapeHtml(formData.email);
-		const safePhone = escapeHtml(formData.phone);
-		const safeAddress = escapeHtml(formData.address);
-		const safePostcode = escapeHtml(formData.postcode);
-		const projectTypeLabel = formatProjectType(formData.projectType);
-		const journeyStageLabel = formatJourneyStage(formData.journeyStage);
+    const safeName = escapeHtml(formData.name);
+    const safeEmail = escapeHtml(formData.email);
+    const safePhone = escapeHtml(formData.phone);
+    const safeAddress = escapeHtml(formData.address);
+    const safePostcode = escapeHtml(formData.postcode);
+    const projectTypeLabel = formatProjectType(formData.projectType);
+    const journeyStageLabel = formatJourneyStage(formData.journeyStage);
 
-		const businessEmailContent = `
+    const businessEmailContent = `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -122,7 +122,7 @@ export async function POST(request: Request) {
             </div>
 
             <div class="highlight">
-              <strong>Next Steps:</strong> Please contact ${safeName} within 24 hours to discuss their garden project requirements and schedule a consultation.
+              <strong>Next Steps:</strong> Please contact ${safeName} within 2 working days to discuss their garden project requirements and schedule a consultation.
             </div>
           </div>
 
@@ -137,14 +137,14 @@ export async function POST(request: Request) {
       </html>
     `;
 
-		await transporter.sendMail({
-			from: process.env.MAIL_USERNAME,
-			to: process.env.BUSINESS_EMAIL,
-			subject: `New Garden Enquiry: ${formData.name} - ${projectTypeLabel}`,
-			html: businessEmailContent,
-		});
+    await transporter.sendMail({
+      from: process.env.MAIL_USERNAME,
+      to: process.env.BUSINESS_EMAIL,
+      subject: `New Garden Enquiry: ${formData.name} - ${projectTypeLabel}`,
+      html: businessEmailContent,
+    });
 
-		const customerEmailContent = `
+    const customerEmailContent = `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -195,7 +195,7 @@ export async function POST(request: Request) {
             <div class="highlight-box">
               <div class="highlight-title">What's Next?</div>
               <div class="highlight-text">
-                One of our experienced garden design specialists will be in touch within the next 24 hours to discuss your requirements and arrange a convenient time for an initial consultation.
+                One of our experienced garden design specialists will be in touch within the next 2 working days to discuss your requirements and arrange a convenient time for an initial consultation.
               </div>
             </div>
 
@@ -220,66 +220,70 @@ export async function POST(request: Request) {
       </html>
     `;
 
-		await transporter.sendMail({
-			from: process.env.MAIL_USERNAME,
-			to: formData.email,
-			subject: "Thank You for Your Garden Enquiry - Gaia Crafted Landscapes",
-			html: customerEmailContent,
-		});
+    await transporter.sendMail({
+      from: process.env.MAIL_USERNAME,
+      to: formData.email,
+      subject: "Thank You for Your Garden Enquiry - Gaia Crafted Landscapes",
+      html: customerEmailContent,
+    });
 
-		let jobberResult: Awaited<ReturnType<typeof syncGardenEnquiryToJobber>> | null =
-			null;
+    let jobberResult: Awaited<
+      ReturnType<typeof syncGardenEnquiryToJobber>
+    > | null = null;
 
-		try {
-			jobberResult = await syncGardenEnquiryToJobber(formData);
-			if (jobberResult.warnings.length) {
-				console.warn("Jobber sync completed with warnings:", jobberResult.warnings);
-			}
-		} catch (error) {
-			console.error("Jobber sync failed:", error);
-		}
+    try {
+      jobberResult = await syncGardenEnquiryToJobber(formData);
+      if (jobberResult.warnings.length) {
+        console.warn(
+          "Jobber sync completed with warnings:",
+          jobberResult.warnings,
+        );
+      }
+    } catch (error) {
+      console.error("Jobber sync failed:", error);
+    }
 
-		return Response.json({
-			success: true,
-			message: "Enquiry submitted successfully",
-			jobber: jobberResult
-				? {
-						action: jobberResult.action,
-						warnings: jobberResult.warnings,
-					}
-				: undefined,
-		});
-	} catch (error) {
-		if (error instanceof FormValidationError) {
-			return Response.json(
-				{
-					success: false,
-					message: error.message,
-				},
-				{ status: 400 },
-			);
-		}
+    return Response.json({
+      success: true,
+      message: "Enquiry submitted successfully",
+      jobber: jobberResult
+        ? {
+            action: jobberResult.action,
+            warnings: jobberResult.warnings,
+          }
+        : undefined,
+    });
+  } catch (error) {
+    if (error instanceof FormValidationError) {
+      return Response.json(
+        {
+          success: false,
+          message: error.message,
+        },
+        { status: 400 },
+      );
+    }
 
-		console.error("Error submitting enquiry:", error);
+    console.error("Error submitting enquiry:", error);
 
-		return Response.json(
-			{
-				success: false,
-				message: "Error submitting enquiry",
-				error: error instanceof Error ? error.message : "Unknown error",
-			},
-			{ status: 500 },
-		);
-	}
+    return Response.json(
+      {
+        success: false,
+        message: "Error submitting enquiry",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
+    );
+  }
 }
 
 function parseBooleanEnv(
-	value: string | undefined,
-	defaultValue: boolean,
+  value: string | undefined,
+  defaultValue: boolean,
 ): boolean {
-	if (!value) {
-		return defaultValue;
-	}
+  if (!value) {
+    return defaultValue;
+  }
 
-	return ["1", "true", "yes", "on"].includes(value.trim().toLowerCase());
+  return ["1", "true", "yes", "on"].includes(value.trim().toLowerCase());
 }
